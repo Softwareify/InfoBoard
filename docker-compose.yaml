@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: infoboard_web
+    env_file:
+      - ./.envs/local/web/.env
+  db_default:
+    image: postgres:15.1-bullseye
+    volumes:
+      - postgres_data_default:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    container_name: infoboard_db_default
+    env_file:
+      - ./.envs/local/db/.env.default
+  db_public:
+    image: postgres:15.1-bullseye
+    volumes:
+      - postgres_data_public:/var/lib/postgresql/data/
+    ports:
+      - "5433:5432"
+    container_name: infoboard_db_public
+    env_file:
+      - ./.envs/local/db/.env.public
+volumes:
+  postgres_data_default:
+  postgres_data_public:
