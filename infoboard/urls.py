@@ -13,10 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('auth/', include('authentication.urls'))
-]
+from django.urls import path, include
+from .settings import IS_CMS, IS_FRONT
+
+urlpatterns = []
+
+if IS_CMS:
+    urlpatterns += [
+        path('', include('cms.urls'))
+    ]
+
+if IS_FRONT:
+    urlpatterns += [
+        path('', include('front.urls')),
+    ]
