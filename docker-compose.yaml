@@ -1,15 +1,26 @@
 version: "3.8"
 services:
-  web:
+  front:
     build: .
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
-    container_name: infoboard_web
+    container_name: infoboard_front
     env_file:
-      - ./.envs/local/web/.env
+      - .envs/local/web/front/.env.front
+  cms:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8001:8001"
+    command: python manage.py runserver 0.0.0.0:8001
+    container_name: infoboard_cms
+    env_file:
+      - .envs/local/web/cms/.env.cms
+
   db_default:
     image: postgres:15.1-bullseye
     volumes:
@@ -19,6 +30,7 @@ services:
     container_name: infoboard_db_default
     env_file:
       - ./.envs/local/db/.env.default
+
   db_public:
     image: postgres:15.1-bullseye
     volumes:
