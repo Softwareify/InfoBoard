@@ -23,10 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = bool(int(os.getenv("DEBUG")))
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(' ')
 
+IS_PRODUCTION = bool(int(os.getenv("IS_PRODUCTION")))
+
+# CMS
+IS_CMS = bool(int(os.getenv("IS_CMS")))
+
+# FRONT
+IS_FRONT = bool(int(os.getenv("IS_FRONT")))
 
 # Application definition
 
@@ -38,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'cms',
+    'front',
 ]
 
 MIDDLEWARE = [
