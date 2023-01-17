@@ -2,6 +2,42 @@
 
 {% block content %}
 
-    <h2> Register page </h2>
+    <div class="wrapper">
+    <div class="title">
+      Registration Form
+    </div>
+    <div class="form">
+       <div class="inputfield">
+          <label>Username</label>
+          <input type="text" class="input">
+       </div>
+        <div class="inputfield">
+          <label>First Name</label>
+          <input type="text" class="input">
+       </div>
+        <div class="inputfield">
+          <label>Last Name</label>
+          <input type="text" class="input">
+       </div>
+       <div class="inputfield">
+          <label>Password</label>
+          <input type="password" class="input">
+       </div>
+      <div class="inputfield">
+          <label>Confirm Password</label>
+          <input type="password" class="input">
+       </div>
+      <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <p>Agreed to terms and conditions</p>
+       </div>
+      <div class="inputfield">
+        <input type="submit" value="Register" class="btn">
+      </div>
+    </div>
+</div>
 
 {% endblock %}
