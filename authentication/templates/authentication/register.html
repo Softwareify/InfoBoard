@@ -6,26 +6,28 @@
     <div class="title">
       Registration Form
     </div>
+        <form method="post" action="">
     <div class="form">
+        {% csrf_token %}
        <div class="inputfield">
           <label>Username</label>
-          <input type="text" class="input">
+          <input type="text" class="input" name="username">
        </div>
         <div class="inputfield">
           <label>First Name</label>
-          <input type="text" class="input">
+          <input type="text" class="input" name="first_name">
        </div>
         <div class="inputfield">
           <label>Last Name</label>
-          <input type="text" class="input">
+          <input type="text" class="input" name="last_name">
        </div>
        <div class="inputfield">
           <label>Password</label>
-          <input type="password" class="input">
+          <input type="password" class="input" name="password1">
        </div>
       <div class="inputfield">
           <label>Confirm Password</label>
-          <input type="password" class="input">
+          <input type="password" class="input" name="password2">
        </div>
       <div class="inputfield terms">
           <label class="check">
@@ -35,9 +37,10 @@
           <p>Agreed to terms and conditions</p>
        </div>
       <div class="inputfield">
-        <input type="submit" value="Register" class="btn">
+        <button type="submit" value="Register" class="btn">Register</button>
       </div>
     </div>
+        </form>
 </div>
 
 {% endblock %}
