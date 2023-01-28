@@ -5,7 +5,7 @@ services:
     build: .
     volumes:
       - .:/code
-    ports:
+    expose:
       - "8000"
     command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
     container_name: infoboard_front
@@ -21,7 +21,7 @@ services:
     build: .
     volumes:
       - .:/code
-    ports:
+    expose:
       - "8001"
     command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
     container_name: infoboard_cms
@@ -41,7 +41,7 @@ services:
     volumes:
       - /var/www/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles
     ports:
-      - "8081:8080"
+      - "8081:8081"
     depends_on:
       - cms
       - front
@@ -57,7 +57,7 @@ services:
     volumes:
       - /var/www/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles
     ports:
-      - "8082:8080"
+      - "8082:8082"
     depends_on:
       - cms
       - front
@@ -70,7 +70,7 @@ services:
     image: postgres:15.1-bullseye
     volumes:
       - postgres_data_default:/var/lib/postgresql/data/
-    ports:
+    expose:
       - "5432"
     container_name: infoboard_db_default
     env_file:
@@ -82,7 +82,7 @@ services:
     image: postgres:15.1-bullseye
     volumes:
       - postgres_data_public:/var/lib/postgresql/data/
-    ports:
+    expose:
       - "5432"
     container_name: infoboard_db_public
     env_file:
