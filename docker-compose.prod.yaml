@@ -14,6 +14,8 @@ services:
     depends_on:
       - db_default
       - db_public
+    networks:
+      - infoboard_network
 
   cms:
     build: .
@@ -29,6 +31,8 @@ services:
       - db_default
       - db_public
       - front
+    networks:
+      - infoboard_network
 
   nginx_infoboard_front:
     container_name: nginx_infoboard_front
@@ -43,6 +47,8 @@ services:
       - front
       - db_default
       - db_public
+    networks:
+      - infoboard_network
 
   nginx_infoboard_cms:
     container_name: nginx_infoboard_cms
@@ -57,6 +63,8 @@ services:
       - front
       - db_default
       - db_public
+    networks:
+      - infoboard_network
 
   db_default:
     image: postgres:15.1-bullseye
@@ -67,6 +75,8 @@ services:
     container_name: infoboard_db_default
     env_file:
       - envs/prod/db/env.default
+    networks:
+      - infoboard_network
 
   db_public:
     image: postgres:15.1-bullseye
@@ -77,6 +87,8 @@ services:
     container_name: infoboard_db_public
     env_file:
       - envs/prod/db/env.public
+    networks:
+      - infoboard_network
 
 volumes:
   postgres_data_default:
