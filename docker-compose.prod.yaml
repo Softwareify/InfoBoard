@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  front:
+  infoboard_front:
     build: .
     volumes:
       - .:/code
@@ -17,7 +17,7 @@ services:
     networks:
       - infoboard_network
 
-  cms:
+  infoboard_cms:
     build: .
     volumes:
       - .:/code
