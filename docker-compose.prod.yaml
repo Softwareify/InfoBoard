@@ -30,7 +30,7 @@ services:
     depends_on:
       - db_default
       - db_public
-      - front
+      - infoboard_front
     networks:
       - infoboard_network
 
@@ -43,8 +43,8 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - cms
-      - front
+      - infoboard_cms
+      - infoboard_front
       - db_default
       - db_public
     networks:
@@ -59,8 +59,8 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - cms
-      - front
+      - infoboard_cms
+      - infoboard_front
       - db_default
       - db_public
     networks:
