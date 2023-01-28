@@ -14,17 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path, include
+from django.urls import include, path
+
 from .settings import IS_CMS, IS_FRONT
 
 urlpatterns = []
 
 if IS_CMS:
-    urlpatterns += [
-        path('', include('cms.urls'))
-    ]
+    urlpatterns += [path("", include("cms.urls"))]
 
 if IS_FRONT:
     urlpatterns += [
-        path('', include('front.urls')),
+        path("", include("front.urls")),
     ]
