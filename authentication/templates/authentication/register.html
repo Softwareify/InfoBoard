@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
-<body>
+{% extends 'authentication/base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+    <div class="wrapper">
+    <div class="title">
+      Registration Form
+    </div>
+        <form method="post" action="">
+    <div class="form">
+        {% csrf_token %}
+       <div class="inputfield">
+          <label>Username</label>
+          <input type="text" class="input" name="username">
+       </div>
+        <div class="inputfield">
+          <label>First Name</label>
+          <input type="text" class="input" name="first_name">
+       </div>
+        <div class="inputfield">
+          <label>Last Name</label>
+          <input type="text" class="input" name="last_name">
+       </div>
+       <div class="inputfield">
+          <label>Password</label>
+          <input type="password" class="input" name="password1">
+       </div>
+      <div class="inputfield">
+          <label>Confirm Password</label>
+          <input type="password" class="input" name="password2">
+       </div>
+      <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <p>Agreed to terms and conditions</p>
+       </div>
+      <div class="inputfield">
+        <button type="submit" value="Register" class="btn">Register</button>
+      </div>
+    </div>
+        </form>
+</div>
+
+{% endblock %}
