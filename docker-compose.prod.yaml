@@ -10,7 +10,7 @@ services:
     command: gunicorn --workers=1 TCS.wsgi:application --bind 0.0.0.0:8000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
     container_name: infoboard_front
     env_file:
-      - .envs/prod/web/front/.env.front
+      - envs/prod/web/front/env.front
     depends_on:
       - db_default
       - db_public
@@ -24,7 +24,7 @@ services:
     command: gunicorn --workers=1 TCS.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
     container_name: infoboard_cms
     env_file:
-      - .envs/prod/web/cms/.env.cms
+      - envs/prod/web/cms/env.cms
     depends_on:
       - db_default
       - db_public
@@ -66,7 +66,7 @@ services:
       - "5432"
     container_name: infoboard_db_default
     env_file:
-      - ./.envs/prod/db/.env.default
+      - envs/prod/db/env.default
 
   db_public:
     image: postgres:15.1-bullseye
@@ -76,7 +76,7 @@ services:
       - "5432"
     container_name: infoboard_db_public
     env_file:
-      - ./.envs/prod/db/.env.public
+      - envs/prod/db/env.public
 
 volumes:
   postgres_data_default:
