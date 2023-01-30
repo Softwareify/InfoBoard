@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     "authentication",
     "cms",
     "front",
+    "content",
+    "content.page",
+    "content.page_structure",
+    "snippets",
+    "snippets.wyswig",
 ]
 
 MIDDLEWARE = [

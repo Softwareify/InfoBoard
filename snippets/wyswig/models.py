@@ -1,13 +1,8 @@
-from django.db import models
-from snippets.models import BaseSnippet
 from ckeditor.fields import RichTextField
+from django.db import models
+
 
 class WyswigSnippet(models.Model):
-    uuid = models.
+    """Wyswig snippet model"""
+
     content = RichTextField()
-
-class VideoSnippet(models.Model):
-    video =
-
-
-
