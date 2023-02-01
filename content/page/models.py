@@ -17,6 +17,7 @@ class Page(models.Model):
         TO_ARCHIVE = 4, "Do archiwum"
         ARCHIVE = 5, "Archiwalny"
 
+    name = models.CharField(max_length=250)
     slug = models.CharField(
         max_length=200, blank=False, null=False, validators=[validate_slug]
     )
@@ -25,8 +26,8 @@ class Page(models.Model):
         choices=StatusChoices.choices, max_length=1, blank=False, null=False, default=StatusChoices.NEW_DRAFT
     )
     descripton = models.CharField(max_length=500)
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_created=True, auto_now=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)
     page_structure = models.OneToOneField(PageStructure, on_delete=models.CASCADE)
-    publish_from = models.DateTimeField(null=False, blank=False)
+    publish_from = models.DateTimeField()
     publish_to = models.DateTimeField()

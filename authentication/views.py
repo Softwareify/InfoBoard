@@ -21,7 +21,7 @@ class LoginView(View):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                return redirect("cms")
+                return redirect("pages")
             else:
                 return (request, self.template_name, {"form": form})
 
