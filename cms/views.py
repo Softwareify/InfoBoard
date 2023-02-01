@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.views import View
+from content.page.selectors import PageSelector
 
 
-class CMSView(View):
-    template_name = "cms/side.html"
+class CMSBaseView(View):
+    template_name = None
+    context = {}
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
+    def add_context(self, context_updated: dict = {}):
+        self.context.update(context_updated)
 
+    def get_context(self, *args, **kwargs):
+        return self.context
 
-def main(request):
-    return render(request, "cms/base.html")
+    def get_template_to_render(self, *args, **kwargs):
+        return self.template_name
