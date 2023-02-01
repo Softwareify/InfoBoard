@@ -128,5 +128,5 @@ dmypy.json
 .pyre/
 .idea/
 
-envs/prod/
+/envs
 /staticfiles
