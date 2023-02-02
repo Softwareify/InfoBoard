@@ -23,9 +23,13 @@ class Page(models.Model):
     )
     author = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     status = models.IntegerField(
-        choices=StatusChoices.choices, max_length=1, blank=False, null=False, default=StatusChoices.NEW_DRAFT
+        choices=StatusChoices.choices,
+        max_length=1,
+        blank=False,
+        null=False,
+        default=StatusChoices.NEW_DRAFT,
     )
-    descripton = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
     created = models.DateTimeField(auto_created=True, auto_now=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)
     page_structure = models.OneToOneField(PageStructure, on_delete=models.CASCADE)
