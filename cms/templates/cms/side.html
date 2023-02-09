@@ -41,7 +41,6 @@
 
       .b-example-vr {
         flex-shrink: 0;
-        width: 1.5rem;
         height: 100vh;
       }
 
@@ -174,7 +173,7 @@
     </div>
   </div>
   <div class="b-example-divider b-example-vr"></div>
-  <div class="container">
+  <div class="container" style="padding: 25px;">
   {% if errors %}
       {% for error_field_name, error_info in errors.items %}
         <div class="alert alert-danger" role="alert">
