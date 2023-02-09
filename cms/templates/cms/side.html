@@ -173,13 +173,14 @@
     </div>
   </div>
   <div class="b-example-divider b-example-vr"></div>
-  <div class="container" style="padding: 25px;">
+  <div class="container" style="padding-top: 15px; margin-left: 0px;">
   {% if errors %}
-      {% for error_field_name, error_info in errors.items %}
-        <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger" role="alert">
+          {% for error_field_name, error_info in errors.items %}
             {{ error_field_name.upper }}{{ error_info }}
-        </div>
-      {% endfor %}
+          {% endfor %}
+      </div>
+
   {% endif %}
     {% if template_name_include %}
       {% include template_name_include %}
