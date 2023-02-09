@@ -6,15 +6,15 @@ from .selectors import PageSelector
 from datetime import datetime
 
 
-class PageSnippetsList(CMSBaseView):
-    pages = PageSelector.list_pages()
+class PageList(CMSBaseView):
     template_name = "cms/side.html"
     template_name_include = "page/page_form_template.html"
     form_class = PageForm
 
     def get(self, request, *args, **kwargs):
+        pages = PageSelector.list_pages()
         context = {
-            "pages": self.pages,
+            "pages": pages,
             "form": self.form_class,
             "template_name_include": self.template_name_include,
         }
@@ -25,22 +25,23 @@ class PageSnippetsList(CMSBaseView):
         form = self.form_class(data=request.POST)
         page_data = {}
 
-        if form.is_valid:
-            name = form.data["name"]
-            slug = form.data["slug"]
-            description = form.data["description"]
-            publish_from = form.data["publish_from"]
-            publish_to = form.data["publish_to"]
+        if form.is_valid():
+            cleaned_data = form.clean()
             page_data.update(
                 {
-                    "name": name,
-                    "slug": slug,
-                    "description": description,
-                    "publish_from": datetime.strptime(publish_from, "%Y-%m-%dT%H:%M"),
-                    "publish_to": datetime.strptime(publish_to, "%Y-%m-%dT%H:%M"),
+                    "name": cleaned_data['name'],
+                    "slug": cleaned_data['slug'],
+                    "description": cleaned_data['description'],
+                    "publish_from": cleaned_data["publish_from"],
+                    "publish_to": cleaned_data["publish_to"],
                 }
             )
 
             PageService.create_page(page_data=page_data, user=request.user)
 
+        errors = form.errors
+        self.add_context({"errors": errors})
         return redirect("pages")
+
+
+
