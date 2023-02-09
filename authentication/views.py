@@ -18,9 +18,9 @@ class LoginView(View):
         """
         Get function handling a get query for login view
 
-        :param request:
-        :param args:
-        :param kwargs:
+        :param request: parameter storing the queries
+        :param args: pass to function a variable number of parameters
+        :param kwargs: pass to function a keywords(handling of dictionaries)
         :return: function return a rendered view
         """
         form = self.form_class()
@@ -30,9 +30,9 @@ class LoginView(View):
         """
         Post function handling a post query for login view
 
-        :param request: param
-        :param args:
-        :param kwargs:
+        :param request: parameter storing the queries
+        :param args: pass to function a variable number of parameters
+        :param kwargs: pass to function a keywords(handling of dictionaries)
         :return: if authentication was good, function redirect a user to cms,
          otherwise function return rendered view
         """
@@ -64,9 +64,9 @@ class RegisterView(View):
         """
         Get function handling a get query for register view
 
-        :param request:
-        :param args:
-        :param kwargs:
+        :param request: parameter storing the queries
+        :param args: pass to function a variable number of parameters
+        :param kwargs: pass to function a keywords(handling of dictionaries)
         :return: function return a rendered view
         """
         form = self.form_class()
@@ -76,9 +76,9 @@ class RegisterView(View):
         """
         Post function handling a post query for register view
 s
-        :param request:
-        :param args:
-        :param kwargs:
+        :param request: parameter storing the queries
+        :param args: pass to function a variable number of parameters
+        :param kwargs: pass to function a keywords(handling of dictionaries)
         :return:
         """
         form = self.form_class(request.POST)
