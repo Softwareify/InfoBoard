@@ -1,0 +1,99 @@
+version: "3.3"
+
+services:
+  infoboard_front:
+    build: .
+    volumes:
+      - .:/code
+    expose:
+      - "8000"
+    command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
+    container_name: infoboard_front
+    env_file:
+      - envs/prod/web/front/env.front
+    depends_on:
+      - db_default
+      - db_public
+    networks:
+      - infoboard_network
+
+  infoboard_cms:
+    build: .
+    volumes:
+      - .:/code
+    expose:
+      - "8001"
+    command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
+    container_name: infoboard_cms
+    env_file:
+      - envs/prod/web/cms/env.cms
+    depends_on:
+      - db_default
+      - db_public
+      - infoboard_front
+    networks:
+      - infoboard_network
+
+  nginx_infoboard_front:
+    container_name: nginx_infoboard_front
+    restart: always
+    build: ./nginx_front
+    volumes:
+      - /var/www/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles
+    ports:
+      - "8081:8081"
+    depends_on:
+      - infoboard_cms
+      - infoboard_front
+      - db_default
+      - db_public
+    networks:
+      - infoboard_network
+
+  nginx_infoboard_cms:
+    container_name: nginx_infoboard_cms
+    restart: always
+    build: ./nginx_cms
+    volumes:
+      - /var/www/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles
+    ports:
+      - "8082:8082"
+    depends_on:
+      - infoboard_cms
+      - infoboard_front
+      - db_default
+      - db_public
+    networks:
+      - infoboard_network
+
+  db_default:
+    image: postgres:15.1-bullseye
+    volumes:
+      - postgres_data_default:/var/lib/postgresql/data/
+    expose:
+      - "5432"
+    container_name: infoboard_db_default
+    env_file:
+      - envs/prod/db/env.default
+    networks:
+      - infoboard_network
+
+  db_public:
+    image: postgres:15.1-bullseye
+    volumes:
+      - postgres_data_public:/var/lib/postgresql/data/
+    expose:
+      - "5432"
+    container_name: infoboard_db_public
+    env_file:
+      - envs/prod/db/env.public
+    networks:
+      - infoboard_network
+
+volumes:
+  postgres_data_default:
+  postgres_data_public:
+
+networks:
+  infoboard_network:
+    external: true

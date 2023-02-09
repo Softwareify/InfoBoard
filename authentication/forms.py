@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 
@@ -14,7 +14,7 @@ class UserRegisterForm(UserCreationForm):
         :param fields: parameter define a field of model
         """
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ["username", "first_name", "last_name", "password1", "password2"]
 
 
 class UserLoginForm(AuthenticationForm):
@@ -26,4 +26,4 @@ class UserLoginForm(AuthenticationForm):
         :param fields: parameter define a field of model
         """
         model = User
-        fields = ['username', 'password']
+        fields = ["username", "password"]
