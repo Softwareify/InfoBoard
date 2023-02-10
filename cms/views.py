@@ -1,6 +1,8 @@
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class CMSBaseView(View):
+class CMSBaseView(LoginRequiredMixin, View):
+    login_url = 'auth/login/'
     template_name = None
     context = {}
 

@@ -36,8 +36,9 @@ class PageList(CMSBaseView):
                     "publish_to": cleaned_data["publish_to"],
                 }
             )
-
             PageService.create_page(page_data=page_data, user=request.user)
+            if self.context.get("errors"):
+                self.context.pop("errors")
 
         errors = form.errors
         self.add_context({"errors": errors})
