@@ -20,6 +20,12 @@ class PageCMSBaseView(CMSView):
         self.add_context(context)
         return render(request, self.get_template_to_render(), self.get_context())
 
+    def get_page_obj_by_pk_from_request(self, *args, **kwargs):
+        page_id = self.kwargs.get("page_pk")
+        if not page_id:
+            return HttpResponseNotFound()
+        return PageSelector.get_page_by_id(page_pk=page_id, database="default")
+
 
 class PageCMSAddView(PageCMSBaseView):
     template_name_form = "page/page_add_form.html"
@@ -62,19 +68,15 @@ class PageCMSEditView(PageCMSBaseView):
 
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
-        page_id = self.kwargs.get("id")
-        if not page_id:
-            return HttpResponseNotFound()
-
-        page = PageSelector.get_page_by_id(page_pk=page_id, database="default")
+        page = self.get_page_obj_by_pk_from_request(request, *args, **kwargs)
         page_status = page.StatusChoices(page.status)
         self.add_context(
-            {"page": page, "page_status": page_status, "active_page": page_id}
+            {"page": page, "page_status": page_status, "active_page": page.id}
         )
         return render(request, self.get_template_to_render(), self.get_context())
 
     def post(self, request, *args, **kwargs):
-        page = self.get_context()["page"]
+        page = self.get_page_obj_by_pk_from_request(request, *args, **kwargs)
         form = self.form_class(data=request.POST, instance=page)
         page_new_data = {}
         if form.is_valid():
