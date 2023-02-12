@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('page', '0002_rename_descripton_page_description'),
+        ("page", "0002_rename_descripton_page_description"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='page',
-            name='created',
+            model_name="page",
+            name="created",
             field=models.DateTimeField(auto_created=True, auto_now=True),
         ),
     ]

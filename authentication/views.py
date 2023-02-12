@@ -12,6 +12,7 @@ class LoginView(View):
     :param form_class: this is a param, which initialize a user login form
     :param template_name: this is a param, which store an address to template
     """
+
     form_class = UserLoginForm
     template_name = "authentication/login.html"
 
@@ -54,11 +55,12 @@ class LoginView(View):
 
 class RegisterView(View):
     """
-        The RegisterView object contains a query handling for register view
+    The RegisterView object contains a query handling for register view
 
-        :param form_class: this is a param, which initialize a user register form
-        :param template_name: this is a param, which store an address to template
+    :param form_class: this is a param, which initialize a user register form
+    :param template_name: this is a param, which store an address to template
     """
+
     form_class = UserRegisterForm
     template_name = "authentication/register.html"
 
@@ -76,12 +78,12 @@ class RegisterView(View):
 
     def post(self, request, *args, **kwargs):
         """
-        Post function handling a post query for register view
-s
-        :param request: parameter storing the queries
-        :param args: pass to function a variable number of parameters
-        :param kwargs: pass to function a keywords(handling of dictionaries)
-        :return:
+                Post function handling a post query for register view
+        s
+                :param request: parameter storing the queries
+                :param args: pass to function a variable number of parameters
+                :param kwargs: pass to function a keywords(handling of dictionaries)
+                :return:
         """
         form = self.form_class(request.POST)
         print(request.POST)

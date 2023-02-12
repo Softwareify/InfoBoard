@@ -1,20 +1,33 @@
-<div class="container">
-    <ul class="nav nav-pills">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Edycja strony</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Edycja struktury strony</a>
-      </li>
-    </ul>
-</div>
-<div class="container" style="padding-top: 5px;">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Nowa wersja do edycji
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Do publikacji</a></li>
-      </ul>
+{% if errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error_field_name, error_info in errors.items %}
+            {{ error_field_name.upper }}{{ error_info }}
+          {% endfor %}
+      </div>
+{% endif %}
+<form action="{{ request.get_full_path }}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label><b>Nazwa strony</b></label>
+        <input class="form-control" type="text" placeholder="Page name" aria-label="Name of page" name="name" value="{{ page.name }}">
     </div>
-</div>
+    <div class="mb-3">
+        <label><b>Slug</b></label>
+        <input class="form-control" type="text" placeholder="Slug" aria-label="Slug of page" name="slug" value="{{ page.slug }}">
+    </div>
+    <div class="mb-3">
+        <label><b>Opis</b></label>
+        <textarea placeholder="Description" class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{ page.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label><b>Publikuj od</b></label>
+        <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_from" value="{{ page.publish_from_iso }}">
+    </div>
+    <div class="mb-3">
+        <label><b>Publikuj do</b></label>
+        <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_to" value="{{ page.publish_to_iso }}">
+    </div>
+    <button class="btn btn-primary" type="submit" aria-expanded="false">
+        Save
+    </button>
+</form>

@@ -1,0 +1,9 @@
+{% extends 'cms/left_nav.html' %}
+{% block right_content %}
+    {% if template_name_top_nav %}
+        {% include template_name_top_nav %}
+    {% endif %}
+    {% if template_name_form %}
+        {% include template_name_form %}
+    {% endif %}
+{% endblock %}

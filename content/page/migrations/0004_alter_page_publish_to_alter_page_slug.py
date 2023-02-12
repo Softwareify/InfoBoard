@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('page', '0003_alter_page_created'),
+        ("page", "0003_alter_page_created"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='page',
-            name='publish_to',
+            model_name="page",
+            name="publish_to",
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='page',
-            name='slug',
+            model_name="page",
+            name="slug",
             field=models.SlugField(max_length=200, unique=True),
         ),
     ]

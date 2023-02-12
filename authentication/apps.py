@@ -8,5 +8,6 @@ class AuthenticationConfig(AppConfig):
     :param default_auto_field: parameter create automatically a primary key
     :param name: parameter set a apps name for model
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'authentication'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "authentication"
