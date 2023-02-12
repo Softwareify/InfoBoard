@@ -11,16 +11,14 @@ class Page(models.Model):
     class StatusChoices(models.IntegerChoices):
         """Status choices"""
 
-        NEW_DRAFT = 1, "Kopia robocza"
+        NEW_DRAFT = 1, "Nowa kopia robocza"
         TO_PUBLISH = 2, "Do publikacji"
         PUBLISHED = 3, "Opublikowany"
         TO_ARCHIVE = 4, "Do archiwum"
         ARCHIVE = 5, "Archiwalny"
 
     name = models.CharField(max_length=250)
-    slug = models.CharField(
-        max_length=200, blank=False, null=False, validators=[validate_slug]
-    )
+    slug = models.SlugField(max_length=200, blank=False, null=False, unique=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     status = models.IntegerField(
         choices=StatusChoices.choices,

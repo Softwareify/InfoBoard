@@ -4,12 +4,23 @@ from django.forms import ModelForm
 
 from .models import Page
 
-
-class PageForm(ModelForm):
+class PageBaseForm(ModelForm):
     class Meta:
         model = Page
-        exclude = ("status", "created", "modified", "page_structure", "author")
+        fields = "__all__"
+
+    def clean_publish_to(self):
+        publish_to_cleaned = self.cleaned_data['publish_to']
+        if not publish_to_cleaned:
+            return None
+        return self.cleaned_data['publish_to']
 
 
-    def is_valid(self):
-        return super().is_valid()
+class PageAddForm(PageBaseForm):
+    class Meta(PageBaseForm.Meta):
+        fields = None
+        exclude = ("status", "created", "modified", "page_structure", "author", )
+
+class PageEditForm(PageBaseForm):
+    class Meta(PageBaseForm.Meta):
+        exclude = ("author", "created", "modified", "page_structure", "status", )
