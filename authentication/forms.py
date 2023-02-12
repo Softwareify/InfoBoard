@@ -6,6 +6,7 @@ class UserRegisterForm(UserCreationForm):
     """
     The UserRegisterForm inherit from UserCreationForm and enable use a create a form for registration
     """
+
     class Meta:
         """
         Class Meta is inner class of UserRegistrationForm. Class Meta is used to change behaviour of model fields.
@@ -13,6 +14,7 @@ class UserRegisterForm(UserCreationForm):
         :param model: create a User model
         :param fields: parameter define a field of model
         """
+
         model = User
         fields = ["username", "first_name", "last_name", "password1", "password2"]
 
@@ -25,5 +27,6 @@ class UserLoginForm(AuthenticationForm):
         :param model: create a User model
         :param fields: parameter define a field of model
         """
+
         model = User
         fields = ["username", "password"]

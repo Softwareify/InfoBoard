@@ -33,3 +33,13 @@ class Page(models.Model):
     page_structure = models.OneToOneField(PageStructure, on_delete=models.CASCADE)
     publish_from = models.DateTimeField()
     publish_to = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def publish_from_iso(self):
+        return self.publish_from.isoformat()[:-9]
+
+    @property
+    def publish_to_iso(self):
+        if not self.publish_to:
+            return None
+        return self.publish_to.isoformat()[:-9]
