@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import validate_slug
 from django.db import models
 
 from content.page_structure.models import PageStructure

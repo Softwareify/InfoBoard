@@ -10,6 +10,13 @@ class PageBaseForm(ModelForm):
         model = Page
         fields = "__all__"
 
+
+    def clean_publish_from(self):
+        publish_from_cleaned = self.cleaned_data["publish_from"]
+        if not publish_from_cleaned:
+            return None
+        return self.cleaned_data["publish_from"]
+
     def clean_publish_to(self):
         publish_to_cleaned = self.cleaned_data["publish_to"]
         if not publish_to_cleaned:
