@@ -75,6 +75,9 @@ services:
     container_name: infoboard_db_default
     env_file:
       - envs/prod/db/env.default
+    environment:
+      PGTZ: 'Europe/Warsaw'
+      TZ: 'Europe/Warsaw'
     networks:
       - infoboard_network
 
@@ -87,6 +90,9 @@ services:
     container_name: infoboard_db_public
     env_file:
       - envs/prod/db/env.public
+    environment:
+      PGTZ: 'Europe/Warsaw'
+      TZ: 'Europe/Warsaw'
     networks:
       - infoboard_network
 
