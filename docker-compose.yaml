@@ -37,6 +37,9 @@ services:
     ports:
       - "5432:5432"
     container_name: infoboard_db_default
+    environment:
+      PGTZ: 'Europe/Warsaw'
+      TZ: 'Europe/Warsaw'
     env_file:
       - envs/local/db/env.default
 
@@ -47,6 +50,9 @@ services:
     ports:
       - "5433:5432"
     container_name: infoboard_db_public
+    environment:
+      PGTZ: 'Europe/Warsaw'
+      TZ: 'Europe/Warsaw'
     env_file:
       - envs/local/db/env.public
 
