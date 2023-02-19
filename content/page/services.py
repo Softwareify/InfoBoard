@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
+from snippets.models import Snippet
+
 from ..page_structure.models import PageStructure
 from .models import Page
 
@@ -12,6 +14,10 @@ class PageService:
     @transaction.atomic
     def create_page(*, page_data: dict, user: User):
         page_structure = PageStructure.objects.create()
+        page_structure.header_snippet = Snippet.objects.create()
+        page_structure.content_snippet = Snippet.objects.create()
+        page_structure.footer_snippet = Snippet.objects.create()
+        page_structure.save()
         page_data.update({"page_structure": page_structure})
         page = Page.objects.create(**page_data, author=user)
         return page
