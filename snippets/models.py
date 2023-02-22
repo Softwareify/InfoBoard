@@ -1,6 +1,6 @@
 from django.db import models
 
-from snippets.wyswig.models import WyswigSnippet
+from snippets.utils import get_ref_snippet_cls, get_ref_snippet_cls_form
 
 
 class Snippet(models.Model):
@@ -11,12 +11,26 @@ class Snippet(models.Model):
 
         TYPE_SNIPPET_CHOICES = "wyswig_snippet", "Wyswig"
 
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_created=True, auto_now=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)
     type = models.CharField(
         max_length=200,
         choices=TypeSnippetChoices.choices,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
     )
-    snippet_id = models.IntegerField(null=False, blank=False)
+    snippet_id = models.IntegerField(null=True, blank=True)
+
+    @property
+    def ref_snippet_obj(self):
+        ref_snippet_cls = get_ref_snippet_cls(self.type)
+        try:
+            return ref_snippet_cls.objects.get(id=self.snippet_id)
+        except Exception:
+            return None
+
+    @property
+    def ref_snippet_form_instance(self):
+        if self.ref_snippet_obj and get_ref_snippet_cls_form(self.type):
+            return get_ref_snippet_cls_form(self.type)(instance=self.ref_snippet_obj)
+        return None

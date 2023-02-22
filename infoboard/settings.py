@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "content.page_structure",
     "snippets",
     "snippets.wyswig",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [

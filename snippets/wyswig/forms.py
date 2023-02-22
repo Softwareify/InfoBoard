@@ -1,10 +1,12 @@
+import random
+
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 
 from .models import WyswigSnippet
 
 
-class CMSWyswigForm(forms.ModelForm):
+class WyswigSnippetForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
 
     class Meta:

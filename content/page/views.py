@@ -3,7 +3,7 @@ import datetime
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect, render
 
-from cms.views import CMSView
+from cms.views import CMSTopNavView, CMSView
 
 from .forms import PageAddForm, PageEditForm
 from .selectors import PageSelector
@@ -21,7 +21,7 @@ class PageCMSBaseView(CMSView):
         return render(request, self.get_template_to_render(), self.get_context())
 
     def get_page_obj_by_pk_from_request(self, *args, **kwargs):
-        page_id = self.kwargs.get("page_pk")
+        page_id = self.kwargs.get("pk")
         if not page_id:
             return HttpResponseNotFound()
         return PageSelector.get_page_by_id(page_pk=page_id, database="default")
@@ -61,11 +61,7 @@ class PageCMSAddView(PageCMSBaseView):
         return redirect("pages")
 
 
-class PageCMSEditView(PageCMSBaseView):
-    template_name_form = "page/edit_page_nav.html"
-    template_name_top_nav = "cms/top_nav.html"
-    form_class = PageEditForm
-
+class PageCMSBaseEditView(PageCMSBaseView, CMSTopNavView):
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
         page = self.get_page_obj_by_pk_from_request(request, *args, **kwargs)
@@ -73,6 +69,14 @@ class PageCMSEditView(PageCMSBaseView):
         self.add_context(
             {"page": page, "page_status": page_status, "active_page": page.id}
         )
+
+
+class PageCMSEditView(PageCMSBaseEditView):
+    template_name_form = "page/edit_page_form.html"
+    form_class = PageEditForm
+
+    def get(self, request, *args, **kwargs):
+        super().get(request, *args, **kwargs)
         return render(request, self.get_template_to_render(), self.get_context())
 
     def post(self, request, *args, **kwargs):

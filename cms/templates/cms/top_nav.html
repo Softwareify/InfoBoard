@@ -1,9 +1,9 @@
 <ul class="nav nav-pills" style="padding-bottom: 5px;">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Edycja strony</a>
+    <a class="nav-link {% if request.resolver_match.url_name == 'page' %}active{% endif %}" aria-current="page" href="edit">Edycja strony</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Edycja struktury strony</a>
+    <a class="nav-link {% if request.resolver_match.url_name == 'page-structure' %}active{% endif %}" aria-current="page-structure" href="edit-structure">Edycja struktury strony</a>
   </li>
 </ul>
 <div class="dropdown" style="padding-bottom: 10px;">
