@@ -1,6 +1,6 @@
 from django.db import models
 
-from snippets.utils import get_ref_snippet_cls
+from snippets.utils import get_ref_snippet_cls, get_ref_snippet_cls_form
 
 
 class Snippet(models.Model):
@@ -26,5 +26,11 @@ class Snippet(models.Model):
         ref_snippet_cls = get_ref_snippet_cls(self.type)
         try:
             return ref_snippet_cls.objects.get(id=self.snippet_id)
-        except ref_snippet_cls.DoesNotExist:
+        except Exception:
             return None
+
+    @property
+    def ref_snippet_form_instance(self):
+        if self.ref_snippet_obj and get_ref_snippet_cls_form(self.type):
+            return get_ref_snippet_cls_form(self.type)(instance=self.ref_snippet_obj)
+        return None

@@ -14,15 +14,21 @@
           Header snippet
             <select class="form-select" id="header_snippet" name="header_snippet">
                 {% if page.page_structure.header_snippet.type %}
-                    <option selected value="{{ page.page_structure.header_snippet.type }}_{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.header_snippet.type }}</option>
+                    <option selected value="{{ page.page_structure.header_snippet.type }}-{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
                     <option value="delete_snippet">Brak snippetu</option>
                 {% else %}
                     <option selected value="None">Wybierz snippet</option>
                 {% endif %}
                 {% for key, value in page.page_structure.header_snippet.TypeSnippetChoices.choices %}
-                    <option value="{{ key }}">{{ value }}</option>
+                     {% if page.page_structure.header_snippet.type == key %}
+                     {% else %}
+                         <option value="{{ key }}">{{ value }}</option>
+                     {% endif %}
                 {% endfor %}
             </select>
+        {% if page.page_structure.header_snippet.ref_snippet_form_instance %}
+         {{ page.page_structure.header_snippet.ref_snippet_form_instance.as_p }}
+        {% endif %}
         </div>
       </div>
       <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
@@ -30,15 +36,21 @@
           Content snippet
             <select class="form-select" id="content_snippet" name="content_snippet">
                 {% if page.page_structure.content_snippet.type %}
-                    <option selected value="{{ page.page_structure.header_snippet.type }}_{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.content_snippet.type }}</option>
+                    <option selected value="{{ page.page_structure.content_snippet.type }}-{{ page.page_structure.content_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
                     <option value="delete_snippet">Brak snippetu</option>
                 {% else %}
                     <option selected value="None">Wybierz snippet</option>
                 {% endif %}
                 {% for key, value in page.page_structure.content_snippet.TypeSnippetChoices.choices %}
-              <option value="{{ key }}">{{ value }}</option>
+                    {% if page.page_structure.content_snippet.type == key %}
+                    {% else %}
+                         <option value="{{ key }}">{{ value }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
+        {% if page.page_structure.content_snippet.ref_snippet_form_instance %}
+            {{ page.page_structure.content_snippet.ref_snippet_form_instance.as_p }}
+        {% endif %}
         </div>
       </div>
       <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
@@ -46,15 +58,21 @@
           Footer snippet
             <select class="form-select" id="footer_snippet" name="footer_snippet">
                 {% if page.page_structure.footer_snippet.type %}
-                    <option selected value="{{ page.page_structure.header_snippet.type }}_{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.footer_snippet.type }}</option>
+                    <option selected value="{{ page.page_structure.footer_snippet.type }}-{{ page.page_structure.footer_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
                     <option value="delete_snippet">Brak snippetu</option>
                 {% else %}
                     <option selected value="None">Wybierz snippet</option>
                 {% endif %}
                 {% for key, value in page.page_structure.footer_snippet.TypeSnippetChoices.choices %}
-              <option value="{{ key }}">{{ value }}</option>
+                    {% if page.page_structure.footer_snippet.type == key %}
+                    {% else %}
+                         <option value="{{ key }}">{{ value }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
+        {% if page.page_structure.footer_snippet.ref_snippet_form_instance %}
+            {{ page.page_structure.footer_snippet.ref_snippet_form_instance.as_p }}
+        {% endif %}
         </div>
       </div>
     </div>
