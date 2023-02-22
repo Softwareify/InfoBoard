@@ -1,6 +1,7 @@
 from django.db import transaction
-from snippets.services import SnippetService
+
 from content.page_structure.models import PageStructure
+from snippets.services import SnippetService
 
 
 class PageStructureService:

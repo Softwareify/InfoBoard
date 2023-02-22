@@ -1,5 +1,7 @@
 from django.db import transaction
+
 from snippets.models import Snippet
+
 from .utils import get_ref_snippet_cls
 
 

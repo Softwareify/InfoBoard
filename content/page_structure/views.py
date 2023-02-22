@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 
 from content.page.views import PageCMSBaseEditView
 from content.page_structure.services import PageStructureService
