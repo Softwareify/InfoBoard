@@ -55,7 +55,6 @@ class PageCMSAddView(PageCMSBaseView):
                 }
             )
             PageService.create_page(page_data=page_data, user=request.user)
-            self.clear_context(["errors"])
 
         self.add_context({"errors": form.errors})
         return redirect("pages")
@@ -97,7 +96,6 @@ class PageCMSEditView(PageCMSBaseEditView):
             PageService.update_page(
                 page=page, page_new_data=page_new_data, user=request.user
             )
-            self.clear_context(["errors"])
 
         self.add_context({"errors": form.errors})
         return redirect("page", *args, **kwargs)

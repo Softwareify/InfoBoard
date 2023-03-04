@@ -6,79 +6,82 @@
           {% endfor %}
       </div>
 {% endif %}
-<form action="{{ request.get_full_path }}" method="POST">
-    {% csrf_token %}
-    <div class="container text-center">
-      <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
-        <div class="col">
-          Header snippet
-            <select class="form-select" id="header_snippet" name="header_snippet">
-                {% if page.page_structure.header_snippet.type %}
-                    <option selected value="{{ page.page_structure.header_snippet.type }}-{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
-                    <option value="delete_snippet">Brak snippetu</option>
-                {% else %}
-                    <option selected value="None">Wybierz snippet</option>
-                {% endif %}
-                {% for key, value in page.page_structure.header_snippet.TypeSnippetChoices.choices %}
-                     {% if page.page_structure.header_snippet.type == key %}
-                     {% else %}
-                         <option value="{{ key }}">{{ value }}</option>
-                     {% endif %}
-                {% endfor %}
-            </select>
-        {% if page.page_structure.header_snippet.ref_snippet_form_instance %}
-         {{ page.page_structure.header_snippet.ref_snippet_form_instance.as_p }}
-        {% endif %}
-        </div>
-      </div>
-      <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
-        <div class="col">
-          Content snippet
-            <select class="form-select" id="content_snippet" name="content_snippet">
-                {% if page.page_structure.content_snippet.type %}
-                    <option selected value="{{ page.page_structure.content_snippet.type }}-{{ page.page_structure.content_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
-                    <option value="delete_snippet">Brak snippetu</option>
-                {% else %}
-                    <option selected value="None">Wybierz snippet</option>
-                {% endif %}
-                {% for key, value in page.page_structure.content_snippet.TypeSnippetChoices.choices %}
-                    {% if page.page_structure.content_snippet.type == key %}
+<div class="container text-center">
+  <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
+    <div class="col">
+      Header snippet
+            <form action="/snippets/{{ page.page_structure.header_snippet.id }}" method="POST">
+            {% csrf_token %}
+                <select class="form-select" id="header_snippet" name="type">
+                    {% if page.page_structure.header_snippet.snippet %}
+                        <option selected value="{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
+                        <option value="delete_snippet">Usuń snippet</option>
                     {% else %}
-                         <option value="{{ key }}">{{ value }}</option>
+                        <option selected value="None">Wybierz snippet</option>
                     {% endif %}
-                {% endfor %}
-            </select>
-        {% if page.page_structure.content_snippet.ref_snippet_form_instance %}
-            {{ page.page_structure.content_snippet.ref_snippet_form_instance.as_p }}
-        {% endif %}
-        </div>
-      </div>
-      <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
-        <div class="col">
-          Footer snippet
-            <select class="form-select" id="footer_snippet" name="footer_snippet">
-                {% if page.page_structure.footer_snippet.type %}
-                    <option selected value="{{ page.page_structure.footer_snippet.type }}-{{ page.page_structure.footer_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
-                    <option value="delete_snippet">Brak snippetu</option>
-                {% else %}
-                    <option selected value="None">Wybierz snippet</option>
-                {% endif %}
-                {% for key, value in page.page_structure.footer_snippet.TypeSnippetChoices.choices %}
-                    {% if page.page_structure.footer_snippet.type == key %}
-                    {% else %}
-                         <option value="{{ key }}">{{ value }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-        {% if page.page_structure.footer_snippet.ref_snippet_form_instance %}
-            {{ page.page_structure.footer_snippet.ref_snippet_form_instance.as_p }}
-        {% endif %}
-        </div>
-      </div>
+                    {% for key, value in page.page_structure.header_snippet.TypeSnippetChoices.choices %}
+                         {% if page.page_structure.header_snippet.type != key %}
+                             <option value="{{ key }}">{{ value }}</option>
+                         {% endif %}
+                    {% endfor %}
+                </select>
+                 {% if page.page_structure.header_snippet.snippet %}
+                     {{ page.page_structure.header_snippet.snippet_form.as_p }}
+                 {% endif %}
+                <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin: 5px;">Save</button>
+            </form>
     </div>
-    <button class="btn btn-primary" type="submit" aria-expanded="false">
-        Save
-    </button>
-</form>
+  </div>
+    <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
+    <div class="col">
+      Content snippet
+            <form action="/snippets/{{ page.page_structure.content_snippet.id }}" method="POST">
+            {% csrf_token %}
+                <select class="form-select" id="content_snippet" name="type">
+                    {% if page.page_structure.content_snippet.snippet %}
+                        <option selected value="{{ page.page_structure.content_snippet.id }}">{{ page.page_structure.content_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
+                        <option value="delete_snippet">Usuń snippet</option>
+                    {% else %}
+                        <option selected value="None">Wybierz snippet</option>
+                    {% endif %}
+                    {% for key, value in page.page_structure.content_snippet.TypeSnippetChoices.choices %}
+                         {% if page.page_structure.content_snippet.type != key %}
+                             <option value="{{ key }}">{{ value }}</option>
+                         {% endif %}
+                    {% endfor %}
+                </select>
+                 {% if page.page_structure.content_snippet.snippet %}
+                     {{ page.page_structure.content_snippet.snippet_form.as_p }}
+                 {% endif %}
+                <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin: 5px;">Save</button>
+            </form>
+    </div>
+  </div>
+    <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
+    <div class="col">
+      Footer snippet
+            <form action="/snippets/{{ page.page_structure.footer_snippet.id }}" method="POST">
+            {% csrf_token %}
+                <select class="form-select" id="footer_snippet" name="type">
+                    {% if page.page_structure.footer_snippet.snippet %}
+                        <option selected value="{{ page.page_structure.footer_snippet.id }}">{{ page.page_structure.footer_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
+                        <option value="delete_snippet">Usuń snippet</option>
+                    {% else %}
+                        <option selected value="None">Wybierz snippet</option>
+                    {% endif %}
+                    {% for key, value in page.page_structure.footer_snippet.TypeSnippetChoices.choices %}
+                         {% if page.page_structure.footer_snippet.type != key %}
+                             <option value="{{ key }}">{{ value }}</option>
+                         {% endif %}
+                    {% endfor %}
+                </select>
+                 {% if page.page_structure.footer_snippet.snippet %}
+                     {{ page.page_structure.footer_snippet.snippet_form.as_p }}
+                 {% endif %}
+                <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin: 5px;">Save</button>
+            </form>
+    </div>
+  </div>
+</div>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>

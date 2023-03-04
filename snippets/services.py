@@ -1,45 +1,28 @@
 from django.db import transaction
-from snippets.models import Snippet
-from .utils import get_ref_snippet_cls
+
+from snippets.models import BaseSnippet
+
+from .utils import get_snippet_cls, get_snippet_service
 
 
-class SnippetService:
+class BaseSnippetService:
     @staticmethod
     @transaction.atomic
-    def update_snippet(
-        *, snippet: Snippet, snippet_ref_name: str, snippet_id: int | None
-    ) -> Snippet.ref_snippet_obj:
-        if not (snippet.snippet_id and snippet_id):
-            ref_snippet = get_ref_snippet_cls(snippet_ref_name).objects.create()
-            snippet.snippet_id = ref_snippet.id
-            snippet.type = snippet_ref_name
-            snippet.save()
+    def update_base_snippet(
+        *, base_snippet: BaseSnippet, base_snippet_type: str, snippet
+    ):
+        base_snippet.type = base_snippet_type
+        base_snippet.snippet_id = snippet.id
+        return base_snippet.save()
 
-            return ref_snippet
+    @staticmethod
+    @transaction.atomic
+    def update_base_snippet_and_delete_ref_snippet(*, base_snippet: BaseSnippet):
+        base_snippet.snippet_service.delete_snippet(base_snippet.snippet)
+        base_snippet.type = None
+        base_snippet.snippet_id = None
+        base_snippet.save()
 
     @staticmethod
     def get_snippets_info(*, data: dict):
-        snippets_info = list()
-        for snippet_location, snippet_ref_name in data.items():
-            if snippet_location.endswith("snippet"):
-                if len(snippet_ref_name.split("-")) > 1:
-                    snippet_ref_name, snippet_id = snippet_ref_name.split("-")
-                    snippets_info.append(
-                        {
-                            "snippet_location": snippet_location,
-                            "snippet_ref_name": snippet_ref_name,
-                            "snippet_id": snippet_id,
-                        }
-                    )
-                else:
-                    snippets_info.append(
-                        {
-                            "snippet_location": snippet_location,
-                            "snippet_ref_name": eval(snippet_ref_name)
-                            if snippet_ref_name == "None"
-                            else snippet_ref_name,
-                            "snippet_id": None,
-                        }
-                    )
-
-        return snippets_info
+        pass

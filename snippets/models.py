@@ -1,9 +1,10 @@
 from django.db import models
 
-from snippets.utils import get_ref_snippet_cls, get_ref_snippet_cls_form
+from snippets.utils import (get_snippet_cls, get_snippet_form,
+                            get_snippet_service)
 
 
-class Snippet(models.Model):
+class BaseSnippet(models.Model):
     """Base snippet model for other snippets"""
 
     class TypeSnippetChoices(models.TextChoices):
@@ -22,15 +23,20 @@ class Snippet(models.Model):
     snippet_id = models.IntegerField(null=True, blank=True)
 
     @property
-    def ref_snippet_obj(self):
-        ref_snippet_cls = get_ref_snippet_cls(self.type)
+    def snippet(self):
+        snippet_cls = get_snippet_cls(self.type)
         try:
-            return ref_snippet_cls.objects.get(id=self.snippet_id)
+            return snippet_cls.objects.get(id=self.snippet_id)
         except Exception:
             return None
 
     @property
-    def ref_snippet_form_instance(self):
-        if self.ref_snippet_obj and get_ref_snippet_cls_form(self.type):
-            return get_ref_snippet_cls_form(self.type)(instance=self.ref_snippet_obj)
+    def snippet_form(self):
+        snippet_form = get_snippet_form(self.type)
+        if self.snippet and snippet_form:
+            return snippet_form(instance=self.snippet)
         return None
+
+    @property
+    def snippet_service(self):
+        return get_snippet_service(self.type)

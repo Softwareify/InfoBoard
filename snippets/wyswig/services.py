@@ -1,13 +1,7 @@
 from django.db import transaction
 
+from snippets.generic_snippets_service import GenericSnippetService
 
-class WyswigSnippetService:
-    @staticmethod
-    @transaction.atomic
-    def update():
-        pass
 
-    @staticmethod
-    @transaction.atomic
-    def create():
-        pass
+class WyswigSnippetService(GenericSnippetService):
+    pass
