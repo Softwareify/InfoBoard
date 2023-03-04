@@ -1,3 +1,3 @@
-from django.shortcuts import render
+from django.views import View
 
-# Create your views here.
+from snippets.wyswig.forms import WyswigSnippetForm

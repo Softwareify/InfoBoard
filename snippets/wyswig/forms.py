@@ -7,7 +7,7 @@ from .models import WyswigSnippet
 
 
 class WyswigSnippetForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())
+    content = forms.CharField(widget=CKEditorWidget(), required=False)
 
     class Meta:
         model = WyswigSnippet

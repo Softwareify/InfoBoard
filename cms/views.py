@@ -30,7 +30,7 @@ class CMSBaseView(LoginRequiredMixin, View):
         """Method for get template to render"""
         return self.template_name
 
-    def get(self, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         """Base method for GET request"""
         self.add_context(
             {
@@ -39,6 +39,8 @@ class CMSBaseView(LoginRequiredMixin, View):
                 "template_name_addidtional_include": self.template_name_addidtional_include,
             }
         )
+        if request.build_absolute_uri() != request.META.get("HTTP_REFERER"):
+            self.clear_context(["errors"])
 
 
 class CMSView(CMSBaseView):

@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.urls import include, path
 
 from content.page.views import PageCMSAddView, PageCMSEditView
@@ -9,6 +8,11 @@ urlpatterns = [
     path("pages/<int:pk>/edit", PageCMSEditView.as_view(), name="page"),
     path(
         "pages/<int:pk>/edit-structure",
+        PageStructreEditView.as_view(),
+        name="page-structure",
+    ),
+    path(
+        "pages/<int:pk>/edit-structure/<int:pk_structure>",
         PageStructreEditView.as_view(),
         name="page-structure",
     ),
