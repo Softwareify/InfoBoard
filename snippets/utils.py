@@ -17,3 +17,8 @@ def get_snippet_form(ref_name_snippet):
 
 def get_snippet_service(ref_name_snippet):
     return SNIPPET_LIST_AVAILABLE_SERVICE.get(ref_name_snippet)
+
+def eval_none_or_get_var(string):
+    if string == 'None':
+        return eval(string)
+    return string

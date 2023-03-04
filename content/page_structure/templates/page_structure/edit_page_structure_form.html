@@ -14,7 +14,7 @@
             {% csrf_token %}
                 <select class="form-select" id="header_snippet" name="type">
                     {% if page.page_structure.header_snippet.snippet %}
-                        <option selected value="{{ page.page_structure.header_snippet.id }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
+                        <option selected value="{{ page.page_structure.header_snippet.type }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
                         <option value="delete_snippet">Usuń snippet</option>
                     {% else %}
                         <option selected value="None">Wybierz snippet</option>
@@ -39,7 +39,7 @@
             {% csrf_token %}
                 <select class="form-select" id="content_snippet" name="type">
                     {% if page.page_structure.content_snippet.snippet %}
-                        <option selected value="{{ page.page_structure.content_snippet.id }}">{{ page.page_structure.content_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
+                        <option selected value="{{ page.page_structure.content_snippet.type }}">{{ page.page_structure.content_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
                         <option value="delete_snippet">Usuń snippet</option>
                     {% else %}
                         <option selected value="None">Wybierz snippet</option>
@@ -64,7 +64,7 @@
             {% csrf_token %}
                 <select class="form-select" id="footer_snippet" name="type">
                     {% if page.page_structure.footer_snippet.snippet %}
-                        <option selected value="{{ page.page_structure.footer_snippet.id }}">{{ page.page_structure.footer_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
+                        <option selected value="{{ page.page_structure.footer_snippet.type }}">{{ page.page_structure.footer_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
                         <option value="delete_snippet">Usuń snippet</option>
                     {% else %}
                         <option selected value="None">Wybierz snippet</option>
