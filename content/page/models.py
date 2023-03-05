@@ -17,7 +17,7 @@ class Page(models.Model):
         ARCHIVE = 5, "Archiwalny"
 
     name = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=200, blank=False, null=False, unique=True)
+    slug = models.SlugField(max_length=200, blank=True, null=False, unique=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     status = models.IntegerField(
         choices=StatusChoices.choices,
