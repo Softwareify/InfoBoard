@@ -2,8 +2,6 @@ from django.db import transaction
 
 from snippets.models import BaseSnippet
 
-from .utils import get_snippet_cls, get_snippet_service
-
 
 class BaseSnippetService:
     @staticmethod

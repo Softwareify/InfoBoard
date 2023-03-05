@@ -1,7 +1,6 @@
 from django.db import models
 
-from snippets.utils import (get_snippet_cls, get_snippet_form,
-                            get_snippet_service)
+from snippets.utils import get_snippet_cls, get_snippet_form, get_snippet_service
 
 
 class BaseSnippet(models.Model):
