@@ -47,26 +47,20 @@ class LoginView(View):
                 login(request, user)
                 return redirect("pages")
             else:
-                return (request, self.template_name, {"form": form})
+                return render(request, self.template_name, {"form": form})
 
         context = {"form": self.form_class}
         return render(request, self.template_name, context=context)
 
 
 class RegisterView(View):
-    """
-    The RegisterView object contains a query handling for register view
-
-    :param form_class: this is a param, which initialize a user register form
-    :param template_name: this is a param, which store an address to template
-    """
+    """The RegisterView object contains a query handling for register view"""
 
     form_class = UserRegisterForm
     template_name = "authentication/register.html"
 
     def get(self, request, *args, **kwargs):
-        """
-        Get function handling a get query for register view
+        """Get function handling a get query for register view
 
         :param request: parameter storing the queries
         :param args: pass to function a variable number of parameters
@@ -77,13 +71,11 @@ class RegisterView(View):
         return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):
-        """
-                Post function handling a post query for register view
-        s
-                :param request: parameter storing the queries
-                :param args: pass to function a variable number of parameters
-                :param kwargs: pass to function a keywords(handling of dictionaries)
-                :return:
+        """Post function handling a post query for register view
+
+        :param request: parameter storing the queries
+        :param args: pass to function a variable number of parameters
+        :param kwargs: pass to function a keywords(handling of dictionaries)
         """
         form = self.form_class(request.POST)
         print(request.POST)

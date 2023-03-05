@@ -19,7 +19,9 @@ class BaseSnippetCMSView(View):
             snippet_type = eval_none_or_get_var(request.POST.get("type"))
             if snippet_type:
                 if not base_snippet.snippet:
-                    snippet_form = get_snippet_form(snippet_type)(instance=base_snippet.snippet, data=request.POST)
+                    snippet_form = get_snippet_form(snippet_type)(
+                        instance=base_snippet.snippet, data=request.POST
+                    )
                     if snippet_form.is_valid():
                         snippet = snippet_form.save()
                         BaseSnippetService.update_base_snippet(
@@ -34,7 +36,9 @@ class BaseSnippetCMSView(View):
                     )
 
                 if base_snippet.snippet:
-                    snippet_form = get_snippet_form(snippet_type)(instance=base_snippet.snippet, data=request.POST)
+                    snippet_form = get_snippet_form(snippet_type)(
+                        instance=base_snippet.snippet, data=request.POST
+                    )
                     if snippet_form.is_valid():
                         snippet = snippet_form.save()
 
