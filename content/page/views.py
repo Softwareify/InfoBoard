@@ -15,7 +15,7 @@ class PageCMSBaseView(CMSView):
 
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
-        pages = PageSelector.list_pages().order_by("-modified")
+        pages = PageSelector.get_all().order_by("-modified")
         context = {"pages": pages}
         self.add_context(context)
         return render(request, self.get_template_to_render(), self.get_context())
@@ -24,7 +24,7 @@ class PageCMSBaseView(CMSView):
         page_id = self.kwargs.get("pk")
         if not page_id:
             return HttpResponseNotFound()
-        return PageSelector.get_page_by_id(page_pk=page_id, database="default")
+        return PageSelector.get(page_id)
 
 
 class PageCMSAddView(PageCMSBaseView):
