@@ -96,9 +96,29 @@ services:
     networks:
       - infoboard_network
 
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    environment:
+      - node.name=es
+      - cluster.name=es-docker
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    expose:
+      - "9200"
+    networks:
+      - infoboard_network
+
 volumes:
   postgres_data_default:
   postgres_data_public:
+  es:
 
 networks:
   infoboard_network:
