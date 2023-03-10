@@ -14,6 +14,7 @@ services:
     depends_on:
       - db_default
       - db_public
+      - es
     networks:
       - infoboard_network
 
@@ -31,6 +32,7 @@ services:
       - db_default
       - db_public
       - infoboard_front
+      - es
     networks:
       - infoboard_network
 
@@ -47,6 +49,7 @@ services:
       - infoboard_front
       - db_default
       - db_public
+      - es
     networks:
       - infoboard_network
 
@@ -63,6 +66,7 @@ services:
       - infoboard_front
       - db_default
       - db_public
+      - es
     networks:
       - infoboard_network
 
