@@ -15,7 +15,7 @@ class PageCMSBaseView(CMSView):
 
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
-        pages = PageSelector.get_all().order_by("-modified")
+        pages = PageSelector.get_all()
         context = {"pages": pages}
         self.add_context(context)
         return render(request, self.get_template_to_render(), self.get_context())

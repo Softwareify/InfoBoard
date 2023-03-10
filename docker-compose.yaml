@@ -14,6 +14,7 @@ services:
     depends_on:
       - db_default
       - db_public
+      - es
 
   cms:
     build: .
@@ -29,6 +30,7 @@ services:
       - db_default
       - db_public
       - front
+      - es
 
   db_default:
     image: postgres:15.1-bullseye
@@ -56,6 +58,24 @@ services:
     env_file:
       - envs/local/db/env.public
 
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    environment:
+      - node.name=es
+      - cluster.name=es-docker
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+
 volumes:
   postgres_data_default:
   postgres_data_public:
+  es_data:

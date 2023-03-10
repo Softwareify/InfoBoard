@@ -27,11 +27,14 @@ class Page(models.Model):
         default=StatusChoices.NEW_DRAFT,
     )
     description = models.CharField(max_length=500)
-    created = models.DateTimeField(auto_created=True, auto_now=True)
+    created = models.DateTimeField(auto_created=True, auto_now_add=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)
     page_structure = models.OneToOneField(PageStructure, on_delete=models.CASCADE)
     publish_from = models.DateTimeField()
     publish_to = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created']
 
     @property
     def publish_from_iso(self):
