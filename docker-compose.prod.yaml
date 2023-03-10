@@ -118,7 +118,7 @@ services:
 volumes:
   postgres_data_default:
   postgres_data_public:
-  es:
+  es_data:
 
 networks:
   infoboard_network:
