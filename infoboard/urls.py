@@ -7,11 +7,14 @@ from elastic_search.page.views import PageDocumentView
 urlpatterns = []
 
 router = DefaultRouter()
-router.register(r'search-page', PageDocumentView, basename='page-search')
+router.register(r"search-page", PageDocumentView, basename="page-search")
 
 if settings.IS_CMS:
-    urlpatterns += [path("", include("cms.urls")), path("", include("snippets.urls")),
-                    path("api/", include(router.urls))]
+    urlpatterns += [
+        path("", include("cms.urls")),
+        path("", include("snippets.urls")),
+        path("api/", include(router.urls)),
+    ]
 
 if settings.IS_FRONT:
     urlpatterns += [

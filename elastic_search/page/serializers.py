@@ -7,4 +7,4 @@ class PageDocumetSerializer(DocumentSerializer):
     class Meta:
         document = PageDocument
 
-        fields = ('name', 'slug', 'description')
+        fields = ("name", "slug", "description")

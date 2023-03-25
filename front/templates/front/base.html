@@ -6,9 +6,14 @@
     <title>Infoboard</title>
 </head>
 <body>
-<div class="container">
+<div class="container header">
     {{ page.page_structure.header_snippet.snippet.content | safe }}
 </div>
-{{ page.page_structure.content_snippet.snippet.content | safe }}
+<div class="container content">
+    {{ page.page_structure.content_snippet.snippet.content | safe }}
+</div>
+<div class="container footer">
+    {{ page.page_structure.footer_snippet.snippet.content | safe }}
+</div>
 </body>
 </html>

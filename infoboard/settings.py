@@ -38,28 +38,37 @@ INSTALLED_APPS = [
     "ckeditor",
     "tinymce",
     "elastic_search",
+    "tinymce",
 ]
 
 ELASTICSEARCH_INDEX_NAMES = {
-    'pages.page': 'pages',
+    "pages.page": "pages",
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ),
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100,
-    'ORDERING_PARAM': 'ordering',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 100,
+    "ORDERING_PARAM": "ordering",
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/",
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 # Elasticsearch configuration
 ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': 'es:9200'
-    },
+    "default": {"hosts": "es:9200"},
 }
 
 MIDDLEWARE = [

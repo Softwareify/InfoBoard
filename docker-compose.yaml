@@ -15,6 +15,7 @@ services:
       - db_default
       - db_public
       - es
+      - redis
 
   cms:
     build: .
@@ -31,6 +32,7 @@ services:
       - db_public
       - front
       - es
+      - redis
 
   db_default:
     image: postgres:15.1-bullseye
@@ -74,6 +76,10 @@ services:
       - es_data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
+
+  redis:
+    image: redis:alpine
+
 
 volumes:
   postgres_data_default:

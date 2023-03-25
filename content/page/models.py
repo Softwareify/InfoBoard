@@ -34,7 +34,7 @@ class Page(models.Model):
     publish_to = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
 
     @property
     def publish_from_iso(self):
