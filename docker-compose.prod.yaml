@@ -120,6 +120,12 @@ services:
     networks:
       - infoboard_network
 
+
+  redis:
+    image: redis:alpine
+    networks:
+      - infoboard_network
+
 volumes:
   postgres_data_default:
   postgres_data_public:
