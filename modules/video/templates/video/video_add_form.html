@@ -1,0 +1,22 @@
+{% if errors %}
+      <div class="alert alert-danger" role="alert">
+          {% for error_field_name, error_info in errors.items %}
+            {{ error_field_name.upper }}{{ error_info }}
+          {% endfor %}
+      </div>
+{% endif %}
+
+<form action='' method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label><b>Nazwa</b></label>
+        <input class="form-control" type="text" placeholder="Nazwa" aria-label="Name of video" name="name">
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+        <input type="file" class="form-control" id="inputGroupFile01" name="filepath">
+    </div>
+    <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin-top: 10px;">
+        Zapisz
+    </button>
+</form>

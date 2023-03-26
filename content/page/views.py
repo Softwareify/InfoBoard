@@ -14,6 +14,7 @@ class PageCMSBaseView(CMSView):
     """Base Page view in CMS"""
 
     def get(self, request, *args, **kwargs):
+        self.clear_context(["videos"])
         super().get(request, *args, **kwargs)
         pages = PageSelector.get_all()
         context = {"pages": pages}

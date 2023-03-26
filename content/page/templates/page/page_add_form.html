@@ -9,11 +9,9 @@
     {% csrf_token %}
     <p>
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            New Page
+            Nowa strona
         </a>
-        <button class="btn btn-primary" type="submit" aria-expanded="false">
-            Save
-        </button>
+        <a class="btn btn-success" href="/modules/videos" style="float: right;">Filmy</a>
     </p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body has-validation">
@@ -35,5 +33,8 @@
                 <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_to">
             </div>
         </div>
+        <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin-top: 10px;">
+            Zapisz
+        </button>
     </div>
 </form>

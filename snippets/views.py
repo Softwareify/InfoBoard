@@ -1,9 +1,7 @@
 from django.db import transaction
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 from django.views import View
 
-from snippets.forms import BaseSnippetForm
 from snippets.selectors import BaseSnippetSelector
 
 from .services import BaseSnippetService
@@ -38,6 +36,6 @@ class BaseSnippetCMSView(View):
                         instance=base_snippet.snippet, data=request.POST
                     )
                     if snippet_form.is_valid():
-                        snippet = snippet_form.save()
+                        snippet_form.save()
 
             return HttpResponseRedirect(request.META.get("HTTP_REFERER"))

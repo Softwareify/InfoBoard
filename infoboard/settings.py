@@ -36,9 +36,10 @@ INSTALLED_APPS = [
     "snippets",
     "snippets.wyswig",
     "ckeditor",
-    "tinymce",
     "elastic_search",
     "tinymce",
+    "modules",
+    "modules.video",
 ]
 
 ELASTICSEARCH_INDEX_NAMES = {
@@ -147,8 +148,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = "static/"
+
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

@@ -1,4 +1,4 @@
-from django_elasticsearch_dsl import fields, Document
+from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
 from content.page.models import Page
