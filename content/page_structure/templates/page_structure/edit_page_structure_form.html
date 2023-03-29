@@ -7,15 +7,14 @@
       </div>
 {% endif %}
 <div class="container text-center">
-  <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
+  <div class="row" style="height: 100%; margin-bottom: 10px; padding: 5px;">
     <div class="col">
-      Header snippet
+      Snippet nagłówka
             <form action="/snippets/{{ page.page_structure.header_snippet.id }}" method="POST">
             {% csrf_token %}
                 <select class="form-select" id="header_snippet" name="type">
                     {% if page.page_structure.header_snippet.snippet %}
-                        <option selected value="{{ page.page_structure.header_snippet.type }}">{{ page.page_structure.header_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
-                        <option value="delete_snippet">Usuń snippet</option>
+                        <option selected value="{{ page.page_structure.header_snippet.type }}">{{ page.page_structure.header_snippet.type_label }}</option>
                     {% else %}
                         <option selected value="None">Wybierz snippet</option>
                     {% endif %}
@@ -24,6 +23,9 @@
                              <option value="{{ key }}">{{ value }}</option>
                          {% endif %}
                     {% endfor %}
+                     {% if page.page_structure.header_snippet.snippet %}
+                        <option value="delete_snippet">Usuń snippet</option>
+                    {% endif %}
                 </select>
                  {% if page.page_structure.header_snippet.snippet %}
                      {{ page.page_structure.header_snippet.snippet_form.as_p }}
@@ -32,15 +34,14 @@
             </form>
     </div>
   </div>
-    <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
+    <div class="row" style="height: 100%; margin-bottom: 10px; padding: 5px;">
     <div class="col">
-      Content snippet
+      Snippet głównej treści
             <form action="/snippets/{{ page.page_structure.content_snippet.id }}" method="POST">
             {% csrf_token %}
                 <select class="form-select" id="content_snippet" name="type">
                     {% if page.page_structure.content_snippet.snippet %}
-                        <option selected value="{{ page.page_structure.content_snippet.type }}">{{ page.page_structure.content_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
-                        <option value="delete_snippet">Usuń snippet</option>
+                        <option selected value="{{ page.page_structure.content_snippet.type }}">{{ page.page_structure.content_snippet.type_label }}</option>
                     {% else %}
                         <option selected value="None">Wybierz snippet</option>
                     {% endif %}
@@ -49,6 +50,9 @@
                              <option value="{{ key }}">{{ value }}</option>
                          {% endif %}
                     {% endfor %}
+                    {% if page.page_structure.content_snippet.snippet %}
+                        <option value="delete_snippet">Usuń snippet</option>
+                    {% endif %}
                 </select>
                  {% if page.page_structure.content_snippet.snippet %}
                      {{ page.page_structure.content_snippet.snippet_form.as_p }}
@@ -57,15 +61,14 @@
             </form>
     </div>
   </div>
-    <div class="row" style="height: 100%; border: 1px solid; margin-bottom: 10px; padding: 5px;">
+    <div class="row" style="height: 100%; margin-bottom: 10px; padding: 5px;">
     <div class="col">
-      Footer snippet
+      Snippet stopki
             <form action="/snippets/{{ page.page_structure.footer_snippet.id }}" method="POST">
             {% csrf_token %}
                 <select class="form-select" id="footer_snippet" name="type">
                     {% if page.page_structure.footer_snippet.snippet %}
-                        <option selected value="{{ page.page_structure.footer_snippet.type }}">{{ page.page_structure.footer_snippet.TypeSnippetChoices.TYPE_SNIPPET_CHOICES.label }}</option>
-                        <option value="delete_snippet">Usuń snippet</option>
+                        <option selected value="{{ page.page_structure.footer_snippet.type }}">{{ page.page_structure.footer_snippet.type_label }}</option>
                     {% else %}
                         <option selected value="None">Wybierz snippet</option>
                     {% endif %}
@@ -74,6 +77,9 @@
                              <option value="{{ key }}">{{ value }}</option>
                          {% endif %}
                     {% endfor %}
+                    {% if page.page_structure.footer_snippet.snippet %}
+                        <option value="delete_snippet">Usuń snippet</option>
+                    {% endif %}
                 </select>
                  {% if page.page_structure.footer_snippet.snippet %}
                      {{ page.page_structure.footer_snippet.snippet_form.as_p }}

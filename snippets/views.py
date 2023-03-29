@@ -32,6 +32,21 @@ class BaseSnippetCMSView(View):
                     )
 
                 if base_snippet.snippet:
+                    if base_snippet.type != snippet_type:
+                        BaseSnippetService.update_base_snippet_and_delete_ref_snippet(
+                            base_snippet=base_snippet
+                        )
+                        snippet_form = get_snippet_form(snippet_type)(
+                            instance=base_snippet.snippet, data=request.POST
+                        )
+                        if snippet_form.is_valid():
+                            snippet = snippet_form.save()
+                            BaseSnippetService.update_base_snippet(
+                                base_snippet=base_snippet,
+                                snippet=snippet,
+                                base_snippet_type=snippet_type,
+                            )
+                        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
                     snippet_form = get_snippet_form(snippet_type)(
                         instance=base_snippet.snippet, data=request.POST
                     )

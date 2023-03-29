@@ -1,0 +1,15 @@
+{% load range %}
+
+<div class="container text-center" style="margin-top: 10px;">
+  <div class="row">
+      {% for i in 0|range:form.fields.videos.choices.queryset.count %}
+        <div class="col">
+            <select class="form-select" name="videos">
+              {% for video in form.fields.videos.choices.queryset %}
+                  <option value="{{ video.id }}">{{ video.name }}</option>
+              {% endfor %}
+            </select>
+        </div>
+      {% endfor %}
+  </div>
+</div>

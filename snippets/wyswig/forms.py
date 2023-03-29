@@ -1,6 +1,3 @@
-import random
-
-from ckeditor.widgets import CKEditorWidget
 from django import forms
 from tinymce.widgets import TinyMCE
 

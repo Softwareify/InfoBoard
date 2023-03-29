@@ -10,7 +10,8 @@ class BaseSnippet(models.Model):
     class TypeSnippetChoices(models.TextChoices):
         """Type snippet choices"""
 
-        TYPE_SNIPPET_CHOICES = "wyswig_snippet", "Wyswig"
+        WYSWIG = "wyswig_snippet", "Wyswig"
+        VIDEO = "video_snippet", "Video"
 
     created = models.DateTimeField(auto_created=True, auto_now=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)
@@ -40,3 +41,7 @@ class BaseSnippet(models.Model):
     @property
     def snippet_service(self):
         return get_snippet_service(self.type)
+
+    @property
+    def type_label(self):
+        return self.TypeSnippetChoices(self.type).label
