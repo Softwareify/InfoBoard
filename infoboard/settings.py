@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     "modules.video",
 ]
 
-# ELASTICSEARCH_INDEX_NAMES = {
-#     "pages.page": "pages",
-# }
+ELASTICSEARCH_INDEX_NAMES = {
+    "pages.page": "pages",
+}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -57,13 +57,13 @@ REST_FRAMEWORK = {
     "ORDERING_PARAM": "ordering",
 }
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://redis:6379/",
-#         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/",
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+    }
+}
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
