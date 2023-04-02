@@ -4,4 +4,10 @@ from modules.video.models import Video
 
 
 class VideoSnippet(models.Model):
-    videos = models.ManyToManyField(Video, null=True, blank=True)
+    pass
+
+
+class VideoPositionSnippet(models.Model):
+    order = models.IntegerField()
+    video_snippet = models.ForeignKey(VideoSnippet, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True)

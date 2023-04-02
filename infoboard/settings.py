@@ -60,7 +60,7 @@ REST_FRAMEWORK = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/",
+        "LOCATION": f"redis://{os.getenv('REDIS_HOST')}:6379/",
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
@@ -70,7 +70,7 @@ SESSION_CACHE_ALIAS = "default"
 
 # Elasticsearch configuration
 ELASTICSEARCH_DSL = {
-    "default": {"hosts": "es:9200"},
+    "default": {"hosts": f"{os.getenv('ES_HOST')}:9200"},
 }
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ ROOT_URLCONF = "infoboard.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -118,7 +118,7 @@ DATABASES = {
         "USER": os.environ.get("DB_USERNAME_PUBLIC"),
         "PASSWORD": os.environ.get("DB_PASSWORD_PUBLIC"),
         "HOST": os.environ.get("DB_HOST_PUBLIC"),
-        "PORT": os.environ.get("DB_PORT"),
+        "PORT": os.environ.get("DB_PUBLIC_PORT"),
     },
 }
 

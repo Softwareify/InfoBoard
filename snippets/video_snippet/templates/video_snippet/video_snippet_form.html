@@ -1,15 +1,26 @@
-{% load range %}
+{% for field in form.hidden_fields %}
+    {{ field }}
+{% endfor %}
 
-<div class="container text-center" style="margin-top: 10px;">
-  <div class="row">
-      {% for i in 0|range:form.fields.videos.choices.queryset.count %}
+<div class="row" style="margin-top: 10px;">
+{% for field in form %}
+    {% if field.is_hidden == False %}
         <div class="col">
-            <select class="form-select" name="videos">
-              {% for video in form.fields.videos.choices.queryset %}
-                  <option value="{{ video.id }}">{{ video.name }}</option>
-              {% endfor %}
+            <select class="form-select" name="{{ field.name }}">
+                 {% if not field.initial %}
+                    <option selected value="">Wybierz film</option>
+                 {% else %}
+                     <option selected value="">Usuń film</option>
+                 {% endif %}
+                {% for video in field.field.choices.queryset %}
+                    {% if field.initial == video.id %}
+                        <option selected value="{{ field.initial }}">{{ video.name }}</option>
+                    {% else %}
+                        <option value="{{ video.id }}">{{ video.name }}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
-      {% endfor %}
-  </div>
+    {% endif %}
+{% endfor %}
 </div>

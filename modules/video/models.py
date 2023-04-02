@@ -16,3 +16,6 @@ class Video(models.Model):
             ext = filepath.name.lower().split(".")[-1]
             filepath.name = f"{uuid.uuid4()}.{ext}"
         super().save(force_insert, force_update, using, update_fields)
+
+    def __str__(self):
+        return self.name
