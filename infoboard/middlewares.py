@@ -16,7 +16,7 @@ class VideoMergeMiddleware:
             video_positions = VideoPositionSnippet.objects.filter(
                 video_snippet_id=video_snippet_qs.id
             ).order_by("-order")
-            clips = [VideoFileClip(video_position.video.filepath.path) for video_position in video_positions if video_position.filepath]
+            clips = [VideoFileClip(video_position.video.filepath.path) for video_position in video_positions if hasattr(getattr(video_position, "video"), "filepath")]
             merged_clips = concatenate_videoclips(clips)
             merged_clips.write_videofile(f"./mediafiles/videos_rendered/{video_snippet_pk}.mp4")
             video_response = open(f"./mediafiles/videos_rendered/{video_snippet_pk}.mp4")
