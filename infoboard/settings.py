@@ -25,8 +25,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "django_elasticsearch_dsl",
-    "django_elasticsearch_dsl_drf",
+    #"django_elasticsearch_dsl",
+    #"django_elasticsearch_dsl_drf",
     "authentication",
     "cms",
     "front",
@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     "modules.video",
 ]
 
-ELASTICSEARCH_INDEX_NAMES = {
-    "pages.page": "pages",
-}
+# ELASTICSEARCH_INDEX_NAMES = {
+#     "pages.page": "pages",
+# }
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -69,9 +69,9 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 # Elasticsearch configuration
-ELASTICSEARCH_DSL = {
-    "default": {"hosts": f"{os.getenv('ES_HOST')}:9200"},
-}
+# ELASTICSEARCH_DSL = {
+#     "default": {"hosts": f"{os.getenv('ES_HOST')}:9200"},
+# }
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -81,6 +81,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "infoboard.middlewares.VideoMergeMiddleware",
 ]
 
 ROOT_URLCONF = "infoboard.urls"
