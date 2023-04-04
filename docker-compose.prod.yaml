@@ -7,7 +7,7 @@ services:
       - .:/code
     expose:
       - "8000"
-    command: gunicorn --workers=8 infoboard.wsgi:application --bind 0.0.0.0:8000 --timeout 1000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
+    command: gunicorn --workers=2 infoboard.wsgi:application --bind 0.0.0.0:8000 --timeout 10000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
     container_name: infoboard_front
     env_file:
       - envs/prod/web/front/env.front
