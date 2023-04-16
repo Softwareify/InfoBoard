@@ -2,6 +2,7 @@ version: "3.3"
 
 services:
   infoboard_front:
+    restart: always
     build: .
     volumes:
       - .:/code
