@@ -7,10 +7,10 @@ services:
       - .:/code
     expose:
       - "8000"
-    command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
+    command: python manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
-      - envs/local/web/front/env.front
+      - envs/local_pr/web/front/env.front
     depends_on:
       - db_default
       - db_public
@@ -24,10 +24,10 @@ services:
       - .:/code
     expose:
       - "8001"
-    command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
+    command: python manage.py runserver 0.0.0.0:8001
     container_name: infoboard_cms
     env_file:
-      - envs/local/web/cms/env.cms
+      - envs/local_pr/web/cms/env.cms
     depends_on:
       - db_default
       - db_public
@@ -74,11 +74,11 @@ services:
     image: postgres:15.1-bullseye
     volumes:
       - postgres_data_default:/var/lib/postgresql/data/
-    expose:
-      - "5432"
+    ports:
+      - "5432:5432"
     container_name: infoboard_db_default
     env_file:
-      - envs/local/db/env.default
+      - envs/local_pr/db/env.default
     environment:
       PGTZ: 'Europe/Warsaw'
       TZ: 'Europe/Warsaw'
@@ -89,11 +89,11 @@ services:
     image: postgres:15.1-bullseye
     volumes:
       - postgres_data_public:/var/lib/postgresql/data/
-    expose:
-      - "5432"
+    ports:
+      - "5433:5432"
     container_name: infoboard_db_public
     env_file:
-      - envs/local/db/env.public
+      - envs/local_pr/db/env.public
     environment:
       PGTZ: 'Europe/Warsaw'
       TZ: 'Europe/Warsaw'

@@ -128,6 +128,6 @@ dmypy.json
 .pyre/
 .idea/
 
-/envs
+/envs/prod
 /staticfiles
 /mediafiles
