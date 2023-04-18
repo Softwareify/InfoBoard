@@ -5,7 +5,7 @@ from django.views import View
 from snippets.selectors import BaseSnippetSelector
 
 from .services import BaseSnippetService
-from .utils import eval_none_or_get_var, get_snippet_form
+from custom.utils import eval_none_or_get_var, get_snippet_form
 
 
 class BaseSnippetCMSView(View):

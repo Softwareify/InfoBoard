@@ -1,4 +1,4 @@
-from content.selectors import BaseSelector
+from custom.selectors import BaseSelector
 
 from .models import Video
 

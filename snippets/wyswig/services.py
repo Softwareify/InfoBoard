@@ -1,6 +1,6 @@
 from django.db import transaction
 
-from snippets.generic_snippets_service import GenericSnippetService
+from snippets.generic import GenericSnippetService
 
 
 class WyswigSnippetService(GenericSnippetService):

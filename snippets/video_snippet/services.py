@@ -1,4 +1,4 @@
-from snippets.generic_snippets_service import GenericSnippetService
+from snippets.generic import GenericSnippetService
 
 
 class VideoSnippetService(GenericSnippetService):
