@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.views import View
 
@@ -85,3 +85,9 @@ class RegisterView(View):
 
         context = {"form": self.form_class}
         return render(request, self.template_name, context=context)
+
+
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect("pages")
