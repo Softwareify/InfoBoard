@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "tinymce",
     "modules",
     "modules.video",
+    "publisher",
 ]
 
 # ELASTICSEARCH_INDEX_NAMES = {

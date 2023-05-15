@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 
 from cms.views import CMSTopNavView, CMSView
 
+from ..page_status.services import PageCMSStatusService
 from .forms import PageAddForm, PageEditForm
 from .selectors import PageSelector
 from .services import PageService
@@ -66,8 +67,14 @@ class PageCMSBaseEditView(PageCMSBaseView, CMSTopNavView):
         super().get(request, *args, **kwargs)
         page = self.get_page_obj_by_pk_from_request(request, *args, **kwargs)
         page_status = page.StatusChoices(page.status)
+        available_statuses = PageCMSStatusService.get_available_status_page(page=page)
         self.add_context(
-            {"page": page, "page_status": page_status, "active_page": page.id}
+            {
+                "page": page,
+                "page_status": page_status,
+                "available_statuses": available_statuses,
+                "active_page": page.id,
+            }
         )
 
 
