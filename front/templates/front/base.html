@@ -7,31 +7,13 @@
    </head>
    <body>
       <div class="container header" style="text-align: center;">
-         {% if page.page_structure.header_snippet.type == "wyswig_snippet" %}
-            {{ page.page_structure.header_snippet.snippet.content | safe }}
-         {% elif page.page_structure.header_snippet.type == "video_snippet" %}
-         <video width="1500" height="500" controls>
-            <source src="/mediafiles/mvideo/{{ page.page_structure.header_snippet.snippet.id }}.mp4" type="video/mp4">
-         </video>
-         {% endif %}
+        {{ page.page_structure.header_snippet.snippet_view.render }}
       </div>
       <div class="container content" style="text-align: center;">
-         {% if page.page_structure.content_snippet.type == "wyswig_snippet" %}
-            {{ page.page_structure.content_snippet.snippet.content | safe }}
-         {% elif page.page_structure.content_snippet.type == "video_snippet" %}
-         <video width="1500" height="500" controls>
-            <source src="/mediafiles/mvideo/{{ page.page_structure.content_snippet.snippet.id }}.mp4" type="video/mp4">
-         </video>
-         {% endif %}
+        {{ page.page_structure.content_snippet.snippet_view.render }}
       </div>
       <div class="container footer" style="text-align: center;">
-         {% if page.page_structure.footer_snippet.type == "wyswig_snippet" %}
-            {{ page.page_structure.footer_snippet.snippet.content | safe }}
-         {% elif page.page_structure.footer_snippet.type == "video_snippet" %}
-         <video width="1500" height="500" controls>
-            <source src="/mediafiles/mvideo/{{ page.page_structure.footer_snippet.snippet.id }}.mp4" type="video/mp4">
-         </video>
-         {% endif %}
+        {{ page.page_structure.footer_snippet.snippet_view.render }}
       </div>
    </body>
 </html>

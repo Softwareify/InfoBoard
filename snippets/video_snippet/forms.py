@@ -1,7 +1,7 @@
 from django import forms
 
 from modules.video.models import Video
-from snippets.video_snippet.models import VideoSnippet, VideoPositionSnippet
+from snippets.video_snippet.models import VideoPositionSnippet, VideoSnippet
 
 
 class VideoPositionSnippetForm(forms.ModelForm):

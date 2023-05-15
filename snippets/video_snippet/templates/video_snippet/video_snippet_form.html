@@ -2,8 +2,9 @@
     {{ field }}
 {% endfor %}
 
-<div class="row" style="margin-top: 10px;">
+
 {% for field in form %}
+    <div class="row" style="margin-top: 2px;">
     {% if field.is_hidden == False %}
         <div class="col">
             <select class="form-select" name="{{ field.name }}">
@@ -22,5 +23,5 @@
             </select>
         </div>
     {% endif %}
+    </div>
 {% endfor %}
-</div>

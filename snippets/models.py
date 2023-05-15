@@ -1,6 +1,7 @@
 from django.db import models
 
-from custom.utils import get_snippet_cls, get_snippet_form, get_snippet_service
+from custom.utils import (get_snippet_cls, get_snippet_form,
+                          get_snippet_service, get_snippet_view)
 
 
 class BaseSnippet(models.Model):
@@ -44,3 +45,7 @@ class BaseSnippet(models.Model):
     @property
     def type_label(self):
         return self.TypeSnippetChoices(self.type).label
+
+    @property
+    def snippet_view(self):
+        return get_snippet_view(self.snippet)

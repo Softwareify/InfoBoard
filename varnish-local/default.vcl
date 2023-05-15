@@ -28,6 +28,9 @@ sub vcl_recv {
         if (req.http.host == "cms.infoboard-local.wronamichal.pl") {
             return (pass);
         }
+        if (req.http.host == "infoboard-local.wronamichal.pl") {
+            return (pass);
+        }
 
         if (req.url ~ "^[^?]*\.(7z|avi|bmp|bz2|css|csv|doc|docx|eot|flac|flv|gif|gz|ico|jpeg|jpg|js|less|mka|mkv|mov|mp3|mp4|mpeg|mpg|odt|ogg|ogm|opus|otf|pdf|png|ppt|pptx|rar|rtf|svg|svgz|swf|tar|tbz|tgz|ttf|txt|txz|wav|webm|webp|woff|woff2|xls|xlsx|xml|xz|zip)(\?.*)?$") {
             unset req.http.Cookie;

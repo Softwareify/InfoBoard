@@ -2,10 +2,10 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views import View
 
+from custom.utils import eval_none_or_get_var, get_snippet_form
 from snippets.selectors import BaseSnippetSelector
 
 from .services import BaseSnippetService
-from custom.utils import eval_none_or_get_var, get_snippet_form
 
 
 class BaseSnippetCMSView(View):
