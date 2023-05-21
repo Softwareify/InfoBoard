@@ -15,4 +15,4 @@ spec:
               service:
                 name: cms-service
                 port:
-                  number: 20251
+                  number: 80
