@@ -4,6 +4,7 @@ metadata:
   name: cms-ingress
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    kubernetes.io/ingress.ipv6: "true"
 spec:
   rules:
     - host: cms.infoboard.wronamichal.pl
