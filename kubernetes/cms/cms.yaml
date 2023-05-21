@@ -58,9 +58,10 @@ metadata:
   labels:
     app: cms-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: cms
   ports:
-    - port: 8001
+    - port: 80
+      protocol: TCP
       targetPort: 8001

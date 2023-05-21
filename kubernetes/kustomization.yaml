@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cms/cms.yaml
+  - front/front.yaml
+  - db/default/db_default.yaml
+  - db/public/db_public.yaml
+  - ingress/ingress.yaml
