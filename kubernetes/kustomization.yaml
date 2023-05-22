@@ -5,4 +5,3 @@ resources:
   - front/front.yaml
   - db/default/db_default.yaml
   - db/public/db_public.yaml
-  - ingress/ingress.yaml
