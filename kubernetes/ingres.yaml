@@ -1,14 +1,17 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress
+  name: nginx
   annotations:
-    kubernetes.io/ingress.class: "traefik"
+    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: cms-service
-          servicePort: 8001
+          service:
+            name: cms-service
+            port:
+              number: 8001
