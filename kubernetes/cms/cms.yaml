@@ -62,6 +62,6 @@ spec:
   selector:
     app: cms
   ports:
-    - port: 9090
+    - port: 8001
       protocol: TCP
       targetPort: 8001
