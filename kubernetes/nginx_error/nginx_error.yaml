@@ -16,9 +16,6 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: '
-events {
-}
-http {
    server {
        listen 80;
        location / {
@@ -1189,8 +1186,6 @@ http {
 
 </html>";
        }
-   }
-}
 '
 ---
 apiVersion: apps/v1
