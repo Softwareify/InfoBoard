@@ -16,10 +16,14 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: '
-   server {
-       listen 80;
-       location / {
-           return 200 "<!DOCTYPE html>
+server {
+    client_max_body_size 20M;
+
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        return 200 "<!DOCTYPE html>
 <html lang="pl-PL">
 
 <head>
@@ -1065,7 +1069,8 @@ data:
                                 <span id="qEQ8WAAM8atgKelf" style="color:#ffffff;">WrONA MICHAŁ - </span><span
                                     id="apqoVK9DaekzainO" style="color:#004aad;">Python</span><span
                                     id="fwzS7CdE0rJtm7J1" style="color:#ffffff;"> </span><span id="PZ5O5TAyqG9lVKN8"
-                                    style="color:#ff914d;">DEVELOPER</span><br></p>
+                                    style="color:#ff914d;">DEVELOPER</span><br>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1076,32 +1081,40 @@ data:
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;box-sizing:border-box;height:100%;">
                             <p id="XCKIdfTkhXo6Xer5"
                                 style="color:#ffffff;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
-                                <span id="ZlJogq3u0Z1n8y8I" style="color:#ffffff;">Cześć,</span></p>
+                                <span id="ZlJogq3u0Z1n8y8I" style="color:#ffffff;">Cześć,</span>
+                            </p>
                             <p id="Hz9ra7hPHQy0iijU"
                                 style="color:#ffffff;white-space:pre;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
-                                <br></p>
+                                <br>
+                            </p>
                             <p id="vYhzJczqHj6aZvAt"
                                 style="color:#ffffff;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
-                                <span id="uWDeWt5fRl9XMLyT" style="color:#ffffff;">dzięki, że wpadłeś. </span></p>
+                                <span id="uWDeWt5fRl9XMLyT" style="color:#ffffff;">dzięki, że wpadłeś. </span>
+                            </p>
                             <p id="uTKNRcVPpUClG1we"
                                 style="color:#ffffff;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
                                 <span id="WhheQzfhs0DP7mpo" style="color:#ffffff;">Prawdopodnie jeśli widzisz tą stronę
-                                    to chciałeś zobaczyć jeden z moich projektów.</span></p>
+                                    to chciałeś zobaczyć jeden z moich projektów.</span>
+                            </p>
                             <p id="w7r3I9CTj0nSEjQh"
                                 style="color:#ffffff;white-space:pre;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
-                                <br></p>
+                                <br>
+                            </p>
                             <p id="cELRIeXbHbzw7ADz"
                                 style="color:#ffffff;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
                                 <span id="IMIHwNcMfUhEuEyc" style="color:#ffffff;">Niestety muszę cię zmartwić bo albo
                                     coś znowu kombinuję, albo coś padło, albo znowu uczę się kolejnch rzeczy i
-                                    eksperymentuje ;) (to najbardziej prawdopodobne)</span></p>
+                                    eksperymentuje ;) (to najbardziej prawdopodobne)</span>
+                            </p>
                             <p id="g2tZW61fSQwtsUse"
                                 style="color:#ffffff;white-space:pre;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;">
-                                <br></p>
+                                <br>
+                            </p>
                             <p id="gBS8lfTsSr932szu"
                                 style="margin-left:0em;text-transform:none;color:#ffffff;letter-spacing:0.022em;font-family:YAEahSPMowE-0;line-height:1.1412845em;direction:ltr;">
                                 <span id="DGoQD7RHZsf21zxC" style="color:#ffffff;">Ale dalej możesz zajrzeć na moje
-                                    social media ewentualnie skontakuj się ze mną :) </span><br></p>
+                                    social media ewentualnie skontakuj się ze mną :) </span><br>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1117,7 +1130,8 @@ data:
                                             style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                                             <img src="https://image.canva.com/TmJGrUkGZhyEOYp_3t4dow%3D%3D/QItsFKWSJCtNqeZsqx11dw%3D%3D.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAQYCGKMUH25PN7VSL%2F20230526%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20230526T032858Z&amp;X-Amz-Expires=71695&amp;X-Amz-Signature=86de1b73098eea5c224bd448b569626ef3f11a82886c4703746dc67060682d35&amp;X-Amz-SignedHeaders=host&amp;response-expires=Fri%2C%2026%20May%202023%2023%3A23%3A53%20GMT"
                                                 alt="GitHub Logo" loading="lazy"
-                                                style="display:block;object-fit:cover;width:100%;height:100%;"></div>
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
                                     </div>
                                 </div>
                             </a></div>
@@ -1135,7 +1149,8 @@ data:
                                             style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                                             <img src="https://image.canva.com/kmUu9r1x4NxgbrL7G_psJQ%3D%3D/4ayji6doJYx-T1yfQuQZZQ%3D%3D.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAQYCGKMUH25PN7VSL%2F20230526%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20230526T052404Z&amp;X-Amz-Expires=64884&amp;X-Amz-Signature=c48cac80ec362a81a7ef7a697cae0bca6e5e503ac7fbd193ca1ba41908f42b93&amp;X-Amz-SignedHeaders=host&amp;response-expires=Fri%2C%2026%20May%202023%2023%3A25%3A28%20GMT"
                                                 alt="Black Official LinkedIn Logo" loading="lazy"
-                                                style="display:block;object-fit:cover;width:100%;height:100%;"></div>
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
                                     </div>
                                 </div>
                             </a></div>
@@ -1153,7 +1168,8 @@ data:
                                             style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                                             <img src="https://image.canva.com/tnEtUN9ZZgKH6isIfgjWfQ%3D%3D/4ayji6doJYx-T1yfQuQZZQ%3D%3D.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAQYCGKMUH25PN7VSL%2F20230526%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20230526T083042Z&amp;X-Amz-Expires=53153&amp;X-Amz-Signature=628d1343f01a58c32a9f8a012368d45502aa6c239a175c3cc62dc80b317adf3b&amp;X-Amz-SignedHeaders=host&amp;response-expires=Fri%2C%2026%20May%202023%2023%3A16%3A35%20GMT"
                                                 alt="ícone envelope e-mail" loading="lazy"
-                                                style="display:block;object-fit:cover;width:100%;height:100%;"></div>
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
                                     </div>
                                 </div>
                             </a></div>
@@ -1171,7 +1187,8 @@ data:
                                             style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                                             <img src="https://image.canva.com/DRvII2sSol0qaqyJXf6PTw%3D%3D/4ayji6doJYx-T1yfQuQZZQ%3D%3D.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAQYCGKMUH25PN7VSL%2F20230526%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20230526T011713Z&amp;X-Amz-Expires=78901&amp;X-Amz-Signature=e846ba40f55cd8153a5b8f152e1556d1b725197bd355571aa64b6d694556c0f6&amp;X-Amz-SignedHeaders=host&amp;response-expires=Fri%2C%2026%20May%202023%2023%3A12%3A14%20GMT"
                                                 alt="Telephone Glyph Icon" loading="lazy"
-                                                style="display:block;object-fit:cover;width:100%;height:100%;"></div>
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
                                     </div>
                                 </div>
                             </a></div>
@@ -1184,8 +1201,9 @@ data:
     </div>
 </body>
 
-</html>";
-       }
+</html>"
+    }
+}
 '
 ---
 apiVersion: apps/v1
