@@ -6,5 +6,5 @@ resources:
   - db/default/db_default.yaml
   - db/public/db_public.yaml
   - redis/redis.yaml
-  - ingres.yaml
+#  - ingres.yaml
   - nginx_error/nginx_error.yaml
