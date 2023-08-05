@@ -12,7 +12,7 @@
       Snippet nagłówka
             <form action="/snippets/{{ page.page_structure.header_snippet.id }}" method="POST">
             {% csrf_token %}
-                <select class="form-select" id="header_snippet" name="type">
+                <select class="form-select" id="header_snippet" name="type" style="margin-bottom: 10px;">
                     {% if page.page_structure.header_snippet.snippet %}
                         <option selected value="{{ page.page_structure.header_snippet.type }}">{{ page.page_structure.header_snippet.type_label }}</option>
                     {% else %}
@@ -39,7 +39,7 @@
       Snippet głównej treści
             <form action="/snippets/{{ page.page_structure.content_snippet.id }}" method="POST">
             {% csrf_token %}
-                <select class="form-select" id="content_snippet" name="type">
+                <select class="form-select" id="content_snippet" name="type" style="margin-bottom: 10px;">
                     {% if page.page_structure.content_snippet.snippet %}
                         <option selected value="{{ page.page_structure.content_snippet.type }}">{{ page.page_structure.content_snippet.type_label }}</option>
                     {% else %}
@@ -66,7 +66,7 @@
       Snippet stopki
             <form action="/snippets/{{ page.page_structure.footer_snippet.id }}" method="POST">
             {% csrf_token %}
-                <select class="form-select" id="footer_snippet" name="type">
+                <select class="form-select" id="footer_snippet" name="type" style="margin-bottom: 10px;">
                     {% if page.page_structure.footer_snippet.snippet %}
                         <option selected value="{{ page.page_structure.footer_snippet.type }}">{{ page.page_structure.footer_snippet.type_label }}</option>
                     {% else %}

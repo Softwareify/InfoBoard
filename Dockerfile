@@ -5,5 +5,3 @@ WORKDIR /code
 COPY req.txt /code/
 RUN pip install -r req.txt
 COPY . /code/
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "8000"]
