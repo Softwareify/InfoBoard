@@ -45,3 +45,7 @@ class Page(models.Model):
         if not self.publish_to:
             return None
         return self.publish_to.isoformat()[:-9]
+
+    def publish(self):
+        self.page_structure.publish()
+        self.save(using="public")

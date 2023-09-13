@@ -5,5 +5,5 @@ from content.page.models import Page
 
 
 def main(request, slug=""):
-    page = Page.objects.get(slug=slug)
+    page = Page.objects.using("public").get(slug=slug)
     return render(request, "front/base.html", {"page": page})

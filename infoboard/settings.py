@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "modules",
     "modules.video",
     "publisher",
+    "content.page_status",
 ]
 
 # ELASTICSEARCH_INDEX_NAMES = {
@@ -149,7 +150,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "static/"
@@ -166,3 +167,5 @@ CORS_ALLOW_METHODS = [
 
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS").split(" ")
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(" ")
+
+MAX_RETRIES = 5

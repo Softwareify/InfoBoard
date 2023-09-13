@@ -49,3 +49,8 @@ class BaseSnippet(models.Model):
     @property
     def snippet_view(self):
         return get_snippet_view(self.snippet)
+
+    def publish(self):
+        if self.snippet:
+            self.snippet.publish()
+        self.save(using="public")

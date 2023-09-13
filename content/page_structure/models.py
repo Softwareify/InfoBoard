@@ -27,3 +27,9 @@ class PageStructure(models.Model):
         null=True,
         related_name="footer_snippet",
     )
+
+    def publish(self):
+        self.header_snippet.publish()
+        self.content_snippet.publish()
+        self.footer_snippet.publish()
+        self.save(using="public")

@@ -6,7 +6,7 @@ from content.page_status.services import PageCMSStatusService
 
 
 class PageCMSStatusView(PageCMSBaseView):
-    service = PageCMSStatusService()
+    service = PageCMSStatusService
 
     def post(self, request, *args, **kwargs):
         page = self.get_page_obj_by_pk_from_request(*args, **kwargs)

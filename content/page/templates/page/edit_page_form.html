@@ -21,11 +21,12 @@
     </div>
     <div class="mb-3">
         <label><b>Publikuj od</b></label>
-        <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_from" value="{{ page.publish_from_iso }}">
+        <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_from" value="{{ page.publish_from.isoformat }}">
+
     </div>
     <div class="mb-3">
         <label><b>Publikuj do</b></label>
-        <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_to" value="{{ page.publish_to_iso }}">
+        <input class="form-control" type="datetime-local" id="birthdaytime" name="publish_to" value="{{ page.publish_to.isoformat }}">
     </div>
     <button class="btn btn-primary" type="submit" aria-expanded="false">
         Save

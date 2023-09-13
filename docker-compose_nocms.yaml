@@ -85,6 +85,20 @@ services:
     ports:
       - "6379:6379"
 
+  publisher:
+      build: .
+      volumes:
+        - .:/code
+      command: python manage.py publisher
+      container_name: publisher
+      env_file:
+        - envs/local/publisher/env.publisher
+      depends_on:
+        - db_default
+        - db_public
+        - es
+        - redis
+
 
 volumes:
   postgres_data_default:

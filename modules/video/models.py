@@ -1,7 +1,8 @@
 import uuid
-from uuid import uuid4
 
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Video(models.Model):
@@ -19,3 +20,10 @@ class Video(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(post_save, sender=Video)
+def post_save(*_args, **_kwargs):
+    instance = _kwargs.get("instance", {})
+    if instance._state.db == "default":
+        instance.save(using="public")

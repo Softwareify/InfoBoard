@@ -7,3 +7,6 @@ class WyswigSnippet(models.Model):
     """Wyswig snippet model"""
 
     content = HTMLField()
+
+    def publish(self):
+        self.save(using="public")

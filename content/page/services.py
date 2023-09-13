@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
+from content.page_status.services import PageCMSStatusService
 from snippets.models import BaseSnippet
 
 from ..page_structure.models import PageStructure
@@ -43,3 +44,14 @@ class PageService:
             setattr(page, key, value)
         page.author = user
         page.save()
+
+    @classmethod
+    @transaction.atomic
+    def publish(cls, page_id: int) -> bool:
+        page = Page.objects.get(id=page_id)
+        PageCMSStatusService.changes_status_page(
+            page=page, new_status=Page.StatusChoices.PUBLISHED.value
+        )
+        page.refresh_from_db()
+        page.publish()
+        return True
