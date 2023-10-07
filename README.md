@@ -1,7 +1,7 @@
 # InfoBoard
-## Front ([infoboard.wronamichal.pl](https://infoboard.wronamichal.pl/))
-## CMS ([cms.infoboard.wronamichal.pl](https://cms.infoboard.wronamichal.pl/))
+## Front ([infoboard.michalwrona.pl](https://infoboard.michalwrona.pl/))
+## CMS ([cms.infoboard.michalwrona.pl](https://cms.infoboard.michalwrona.pl/))
 
-## Front - Kubernetes ([infoboard-kubernetes.wronamichal.pl](https://infoboard-kubernetes.wronamichal.pl/))
-## CMS - Kubernetes ([cms.infoboard-kubernetes.wronamichal.pl](https://cms.infoboard-kubernetes.wronamichal.pl/))
+## Front - Kubernetes ([infoboard-kubernetes.michalwrona.pl](https://infoboard-kubernetes.michalwrona.pl/))
+## CMS - Kubernetes ([cms.infoboard-kubernetes.michalwrona.pl](https://cms.infoboard-kubernetes.michalwrona.pl/))
 
