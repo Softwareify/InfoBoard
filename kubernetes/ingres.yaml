@@ -6,7 +6,7 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: "cms.infoboard-kubernetes.wronamichal.pl"
+  - host: "cms.infoboard-kubernetes.michalwrona.pl"
     http:
       paths:
       - path: /
@@ -16,7 +16,7 @@ spec:
             name: cms-service
             port:
               number: 8001
-  - host: "infoboard-kubernetes.wronamichal.pl"
+  - host: "infoboard-kubernetes.michalwrona.pl"
     http:
       paths:
       - path: /
