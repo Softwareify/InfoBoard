@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "snippets",
     "snippets.wyswig",
     "snippets.video_snippet",
+    "snippets.html",
     "ckeditor",
     "elastic_search",
     "tinymce",
@@ -83,7 +84,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "infoboard.middlewares.VideoMergeMiddleware",
+    # "infoboard.middlewares.VideoMergeMiddleware",
 ]
 
 ROOT_URLCONF = "infoboard.urls"

@@ -1,4 +1,5 @@
 from django.db import models
+from moviepy.editor import *
 
 from modules.video.models import Video
 
@@ -12,6 +13,14 @@ class VideoSnippet(models.Model):
             video_snippet_id=self.id
         ):
             position_video_snippet.save(using="public")
+
+        clips = [
+            VideoFileClip(video_position.video.filepath.path)
+            for video_position in self.positions.all().order_by("-order")
+            if hasattr(getattr(video_position, "video"), "filepath")
+        ]
+        merged_clips = concatenate_videoclips(clips)
+        merged_clips.write_videofile(f"./mediafiles/videos_rendered/{self.id}.mp4")
 
 
 class VideoPositionSnippet(models.Model):
