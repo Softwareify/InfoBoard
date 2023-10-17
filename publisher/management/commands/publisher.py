@@ -28,4 +28,4 @@ class Command(BaseCommand):
                     )
                     task.execution_date = now
                 task.save()
-            sleep(15)
+            sleep(5)

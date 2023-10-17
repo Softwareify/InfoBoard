@@ -1,7 +1,11 @@
 from django.db import models
 
-from custom.utils import (get_snippet_cls, get_snippet_form,
-                          get_snippet_service, get_snippet_view)
+from custom.utils import (
+    get_snippet_cls,
+    get_snippet_form,
+    get_snippet_service,
+    get_snippet_view,
+)
 
 
 class BaseSnippet(models.Model):
@@ -12,6 +16,7 @@ class BaseSnippet(models.Model):
 
         WYSWIG = "wyswig_snippet", "Wyswig"
         VIDEO = "video_snippet", "Video"
+        HTML = "html_snippet", "HTML"
 
     created = models.DateTimeField(auto_created=True, auto_now=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)
