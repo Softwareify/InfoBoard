@@ -115,6 +115,8 @@ services:
       - db_public
 #      - es
       - redis
+    networks:
+      - infoboard_network
 
 #  es:
 #    container_name: es
