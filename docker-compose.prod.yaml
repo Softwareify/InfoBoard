@@ -9,7 +9,7 @@ services:
     expose:
       - "8000"
     command: gunicorn --workers=2 infoboard.wsgi:application --bind 0.0.0.0:8000 --timeout 10000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
       - envs/prod/web/front/env.front
