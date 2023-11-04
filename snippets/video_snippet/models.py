@@ -1,4 +1,3 @@
-import requests
 from django.db import models
 from moviepy.editor import *
 
@@ -25,9 +24,6 @@ class VideoSnippet(models.Model):
             os.remove(f"./mediafiles/videos_rendered/{self.id}.mp4")
         merged_clips.write_videofile(filename=f"./mediafiles/videos_rendered/{self.id}.mp4", audio=False)
         merged_clips.close()
-        response = requests.request("FULLBAN", "http://172.22.0.5:80")
-        if response.status_code == 200:
-            print(response.text)
 
 class VideoPositionSnippet(models.Model):
     order = models.IntegerField()
