@@ -20,8 +20,11 @@ class Command(BaseCommand):
                 due_date__lte=now, retries__lt=settings.MAX_RETRIES, execution_date=None
             )
             for task in tasks:
-                if not getattr(cls.service, task.type_publication)(task.object_id):
+                try:
+                    getattr(cls.service, task.type_publication)(task.object_id)
+                except Exception as e:
                     task.retries += 1
+                    print(f"Publication failed. Message: {str(e)}")
                 else:
                     print(
                         f"Publication success. Task type: {task.type_publication}, object id: {task.object_id}"
