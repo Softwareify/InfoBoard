@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+#  annotations:
+#    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - host: "cms-infoboard-kubernetes.michalwrona.pl"
