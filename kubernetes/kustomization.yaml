@@ -3,8 +3,4 @@ kind: Kustomization
 resources:
   - cms/cms.yaml
   - front/front.yaml
-  - db/default/db_default.yaml
-  - db/public/db_public.yaml
-  - redis/redis.yaml
   - ingres.yaml
-  - nginx_error/nginx_error.yaml

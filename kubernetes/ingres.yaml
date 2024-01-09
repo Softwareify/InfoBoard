@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx
+  name: ingress
   annotations:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: "cms.infoboard-kubernetes.michalwrona.pl"
+  - host: "cms-infoboard-kubernetes.michalwrona.pl"
     http:
       paths:
       - path: /
@@ -26,13 +26,4 @@ spec:
             name: front-service
             port:
               number: 8000
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nginx
-            port:
-              number: 80
 

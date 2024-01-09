@@ -20,10 +20,11 @@ class VideoSnippet(models.Model):
             if hasattr(getattr(video_position, "video"), "filepath")
         ]
         merged_clips = concatenate_videoclips(clips)
-        if os.path.exists(f"/mediafiles/videos_rendered/{self.id}.mp4"):
-            os.remove(f"/mediafiles/videos_rendered/{self.id}.mp4")
+        if os.path.exists(f"mediafiles/videos_rendered/{self.id}.mp4"):
+            os.remove(f"mediafiles/videos_rendered/{self.id}.mp4")
         merged_clips.write_videofile(filename=f"./mediafiles/videos_rendered/{self.id}.mp4", audio=False)
         merged_clips.close()
+
 
 class VideoPositionSnippet(models.Model):
     order = models.IntegerField()
