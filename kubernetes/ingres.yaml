@@ -6,8 +6,8 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: "cms-infoboard-kubernetes.michalwrona.pl"
-    http:
+  #- host: "cms-infoboard-kubernetes.michalwrona.pl"
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -16,14 +16,14 @@ spec:
             name: cms-service
             port:
               number: 8001
-  - host: "infoboard-kubernetes.michalwrona.pl"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: front-service
-            port:
-              number: 8000
+#  - host: "infoboard-kubernetes.michalwrona.pl"
+#    http:
+#      paths:
+#      - path: /
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: front-service
+#            port:
+#              number: 8000
 
