@@ -1,7 +1,7 @@
 from datetime import datetime
 from time import sleep
-import requests
 
+import requests
 from django.core.management.base import BaseCommand
 
 from infoboard import settings

@@ -17,7 +17,7 @@ data:
     }
         
     sub vcl_recv {
-        if (req.http.host ~ "infoboard-kubernetes.michalwrona.local.pl") {
+        if (req.http.host == "infoboard-kubernetes.michalwrona.local.pl") {
             set req.backend_hint = front;
         } else {
             set req.backend_hint = cms;
