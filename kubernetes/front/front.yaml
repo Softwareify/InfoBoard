@@ -6,14 +6,14 @@ data:
     DEBUG: "1"
     SECRET_KEY: "infoboard_secret_key"
     ALLOWED_HOSTS: "*"
-    DB_NAME: "cms"
+    DB_NAME: "default"
     DB_NAME_PUBLIC: "public"
-    DB_USERNAME: "postgres"
+    DB_USERNAME: "admin"
     DB_USERNAME_PUBLIC: "admin"
-    DB_PASSWORD: "infoboard-admin"
-    DB_PASSWORD_PUBLIC: "infoboard-admin"
-    DB_HOST: "34.118.23.61"
-    DB_HOST_PUBLIC: "34.118.23.61"
+    DB_PASSWORD: "admin"
+    DB_PASSWORD_PUBLIC: "admin"
+    DB_HOST: "db-default"
+    DB_HOST_PUBLIC: "db-public"
     DB_PORT: "5432"
     DB_PUBLIC_PORT: "5432"
     CORS_ALLOWED_ORIGINS: "http://0.0.0.0:8000"
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - name: front
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: wronamichal/infoboard
           envFrom:
             - configMapRef:
@@ -62,5 +62,5 @@ spec:
   selector:
     app: front
   ports:
-    - port: 8000
+    - port: 8081
       targetPort: 8000
