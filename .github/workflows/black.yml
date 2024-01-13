@@ -29,4 +29,4 @@ jobs:
         if [ -f req.txt ]; then pip install -r req.txt; fi
     - name: Lint with black
       run: |
-        python -m black .
+        python -m black --check --verbose .
