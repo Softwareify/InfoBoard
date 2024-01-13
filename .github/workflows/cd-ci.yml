@@ -23,7 +23,7 @@ jobs:
         python -m black --check --verbose .
     - name: Lint with isort
       run: |
-        python -m isort --check-only --recursive . 
+        python -m isort --check-only . 
   
   build:
     runs-on: ubuntu-latest
