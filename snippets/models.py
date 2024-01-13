@@ -1,11 +1,6 @@
 from django.db import models
 
-from custom.utils import (
-    get_snippet_cls,
-    get_snippet_form,
-    get_snippet_service,
-    get_snippet_view,
-)
+from custom import utils
 
 
 class BaseSnippet(models.Model):
@@ -30,7 +25,7 @@ class BaseSnippet(models.Model):
 
     @property
     def snippet(self):
-        snippet_cls = get_snippet_cls(self.type)
+        snippet_cls = utils.get_snippet_cls(self.type)
         try:
             return snippet_cls.objects.get(id=self.snippet_id)
         except Exception:
@@ -38,14 +33,14 @@ class BaseSnippet(models.Model):
 
     @property
     def snippet_form(self):
-        snippet_form = get_snippet_form(self.type)
+        snippet_form = utils.get_snippet_form(self.type)
         if self.snippet and snippet_form:
             return snippet_form(instance=self.snippet)
         return None
 
     @property
     def snippet_service(self):
-        return get_snippet_service(self.type)
+        return utils.get_snippet_service(self.type)
 
     @property
     def type_label(self):
@@ -53,7 +48,7 @@ class BaseSnippet(models.Model):
 
     @property
     def snippet_view(self):
-        return get_snippet_view(self.snippet)
+        return utils.get_snippet_view(self.snippet)
 
     def publish(self):
         if self.snippet:
