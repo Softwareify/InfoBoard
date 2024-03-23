@@ -3,12 +3,12 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from elastic_search.page.views import PageDocumentView
+# from elastic_search.page.views import PageDocumentView
 
 urlpatterns = []
 
 router = DefaultRouter()
-router.register(r"search-page", PageDocumentView, basename="page-search")
+# router.register(r"search-page", PageDocumentView, basename="page-search")
 
 if settings.IS_CMS:
     urlpatterns += [

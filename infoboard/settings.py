@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "snippets.video_snippet",
     "snippets.html",
     "ckeditor",
-    "elastic_search",
+    #"elastic_search",
     "tinymce",
     "modules",
     "modules.video",
