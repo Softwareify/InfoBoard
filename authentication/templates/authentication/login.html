@@ -1,29 +1,24 @@
 {% extends 'authentication/base.html' %}
 
 {% block content %}
-
-    <h2> Infoboard </h2>
-
-    <div class="center">
-      <h1>Login</h1>
-      <form method="post" action="">
-          {% csrf_token %}
-        <div class="txt_field">
-          <input type="text" name="username" required>
-          <span></span>
-          <label>Username</label>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="container">
+            <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+                <div class="col-md-4 mx-auto">
+                    <h1 style="text-align: center">Infoboard CMS</h1>
+                    <div class="mb-3">
+                        <label for="loginInput" class="form-label">Login</label>
+                        <input type="text" class="form-control" id="loginInput" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginInput" class="form-label">Hasło</label>
+                        <input type="password" class="form-control" id="loginInput" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Zaloguj</button>
+                </div>
+            </div>
         </div>
-        <div class="txt_field">
-          <input type="password" name="password" required>
-          <span></span>
-          <label>Password</label>
-        </div>
-        <div class="pass">Forgot Password?</div>
-        <input type="submit" value="Login">
-        <div class="signup_link">
-          Not a member? <a href="/auth/register/">Signup</a>
-        </div>
-      </form>
-    </div>
+    </form>
 
 {% endblock %}

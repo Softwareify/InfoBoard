@@ -16,6 +16,8 @@ django-tinymce==3.5.0
 djangorestframework==3.14.0
 elasticsearch==7.17.9
 elasticsearch-dsl==7.4.1
+ffmpeg-python==0.2.0
+future==1.0.0
 gunicorn==20.1.0
 idna==3.4
 imageio==2.27.0

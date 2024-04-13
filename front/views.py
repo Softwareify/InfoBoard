@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from django.views import View
 
-from content.page.models import Page
+from content.page.selectors import PageSelector
 
 
-def main(request, slug=""):
-    page = Page.objects.using("public").get(slug=slug)
+def public(request, slug=""):
+    page = PageSelector.get_page_by_slug(slug=slug, database="public")
+    return render(request, "front/base.html", {"page": page})
+
+
+def preview(request, pk):
+    page = PageSelector.get(instance_id=pk)
     return render(request, "front/base.html", {"page": page})

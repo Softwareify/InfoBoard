@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from content.page.selectors import PageSelector
 from content.page.views import PageCMSBaseEditView
 
 

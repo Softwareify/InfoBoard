@@ -1,8 +1,8 @@
 from django.urls import include, path
 
-from .views import main
+from .views import preview, public
 
 urlpatterns = [
-    path("", main),
-    path("<slug:slug>", main),
+    path("", public),
+    path("<slug:slug>", public),
 ]

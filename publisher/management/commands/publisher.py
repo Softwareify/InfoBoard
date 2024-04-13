@@ -31,8 +31,5 @@ class Command(BaseCommand):
                         f"Publication success. Task type: {task.type_publication}, object id: {task.object_id}"
                     )
                     task.execution_date = now
-                    response = requests.request("FULLBAN", "http://172.22.0.5:80")
-                    if response.status_code == 200:
-                        print(response.text)
                 task.save()
             sleep(5)

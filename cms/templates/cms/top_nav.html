@@ -5,6 +5,9 @@
   <li class="nav-item">
     <a class="nav-link {% if request.resolver_match.url_name == 'page-structure' %}active{% endif %}" aria-current="page-structure" href="edit-structure">Edycja struktury strony</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="preview" href="/preview/{{ page.id }}" target="_blank">Podgląd</a>
+  </li>
 </ul>
 <form action="change-status" method="POST">
 {% csrf_token %}
