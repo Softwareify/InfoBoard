@@ -25,8 +25,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    # "django_elasticsearch_dsl",
-    # "django_elasticsearch_dsl_drf",
     "authentication",
     "cms",
     "front",
@@ -37,18 +35,14 @@ INSTALLED_APPS = [
     "snippets.wyswig",
     "snippets.video_snippet",
     "snippets.html",
+    "snippets.header",
     "ckeditor",
-    # "elastic_search",
     "tinymce",
     "modules",
     "modules.video",
     "publisher",
     "content.page_status",
 ]
-
-# ELASTICSEARCH_INDEX_NAMES = {
-#     "pages.page": "pages",
-# }
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -58,14 +52,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 100,
     "ORDERING_PARAM": "ordering",
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{os.getenv('REDIS_HOST')}:6379/",
-        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
-    }
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
@@ -169,4 +155,4 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS").split(" ")
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(" ")
 
-MAX_RETRIES = 5
+MAX_RETRIES = 100

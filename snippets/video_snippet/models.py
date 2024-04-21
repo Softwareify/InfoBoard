@@ -1,5 +1,5 @@
+import ffmpeg
 from django.db import models
-from moviepy.editor import *
 
 from modules.video.models import Video
 
@@ -13,19 +13,16 @@ class VideoSnippet(models.Model):
             video_snippet_id=self.id
         ):
             position_video_snippet.save(using="public")
-
-        clips = [
-            VideoFileClip(video_position.video.filepath.path)
+        clips_input = [
+            ffmpeg.input(video_position.video.filepath.path)
             for video_position in self.positions.all().order_by("-order")
             if hasattr(getattr(video_position, "video"), "filepath")
         ]
-        merged_clips = concatenate_videoclips(clips)
-        if os.path.exists(f"mediafiles/videos_rendered/{self.id}.mp4"):
-            os.remove(f"mediafiles/videos_rendered/{self.id}.mp4")
-        merged_clips.write_videofile(
-            filename=f"./mediafiles/videos_rendered/{self.id}.mp4", audio=False
+        merge_clips_inputs = ffmpeg.concat(*clips_input)
+        merge_clips_output = merge_clips_inputs.output(
+            f"./mediafiles/videos_rendered/{self.id}.mp4", format="mp4"
         )
-        merged_clips.close()
+        merge_clips_output.run(overwrite_output=True)
 
 
 class VideoPositionSnippet(models.Model):

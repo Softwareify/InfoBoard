@@ -1,0 +1,20 @@
+{% for field in form %}
+    {% if field.name == "hx" %}
+        <select class="form-select" aria-label="Hx select" name="hx" style="margin-bottom: 10px">
+            {% for choice in field.field.choices %}
+                {% if forloop.first %}
+                    <option value="{{ field.initial  }}">{{ field.initial | upper}}</option>
+                {% endif %}
+                {% if field.initial != choice.0 %}
+                    {% if choice.0 != "" %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </select>
+    {% elif field.name == "content" %}
+        <div class="mb-3" style="margin-top: 10px">
+            <textarea name="{{ field.name }}" class="form-control" id="headerContent" rows="3">{{ field.initial }}</textarea>
+        </div>
+    {% endif %}
+{% endfor %}

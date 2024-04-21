@@ -1,7 +1,16 @@
-FROM python:3.10-slim-bullseye
+FROM debian:bullseye-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+ENV PATH="/usr/bin/python3:${PATH}"
+RUN apt-get update && \
+    apt-get install -y ffmpeg
 WORKDIR /code
 COPY req.txt /code/
-RUN pip install -r req.txt
+RUN pip3 install --no-cache-dir -r req.txt
 COPY . /code/

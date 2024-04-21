@@ -1,3 +1,7 @@
+from snippets.header.forms import HeaderSnippetForm
+from snippets.header.models import HeaderSnippet
+from snippets.header.service import HeaderSnippetService
+from snippets.header.snippets import HeaderSnippetView
 from snippets.html.forms import HtmlSnippetForm
 from snippets.html.models import HtmlSnippet
 from snippets.html.service import HtmlSnippetService
@@ -15,21 +19,25 @@ SNIPPETS = {
     "wyswig_snippet": WyswigSnippet,
     "video_snippet": VideoSnippet,
     "html_snippet": HtmlSnippet,
+    "header_snippet": HeaderSnippet,
 }
 SNIPPETS_FORMS = {
     "wyswig_snippet": WyswigSnippetForm,
     "video_snippet": VideoSnippetForm,
     "html_snippet": HtmlSnippetForm,
+    "header_snippet": HeaderSnippetForm,
 }
 SNIPPETS_SERVICES = {
     "wyswig_snippet": WyswigSnippetService,
     "video_snippet": VideoSnippetService,
     "html_snippet": HtmlSnippetService,
+    "header_snippet": HeaderSnippetService,
 }
 SNIPPETS_VIEWS = {
     WyswigSnippet: WyswigSnippetView,
     VideoSnippet: VideoSnippetView,
     HtmlSnippet: HtmlSnippetView,
+    HeaderSnippet: HeaderSnippetView,
 }
 
 

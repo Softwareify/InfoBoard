@@ -12,6 +12,7 @@ class BaseSnippet(models.Model):
         WYSWIG = "wyswig_snippet", "Wyswig"
         VIDEO = "video_snippet", "Video"
         HTML = "html_snippet", "HTML"
+        HEADER = "header_snippet", "Header"
 
     created = models.DateTimeField(auto_created=True, auto_now=True)
     modified = models.DateTimeField(auto_created=True, auto_now=True)

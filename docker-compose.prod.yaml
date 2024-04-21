@@ -3,30 +3,28 @@ version: "3.3"
 services:
   infoboard_front:
     restart: always
-    build: .
+    image: wronamichal/infoboard:latest
     volumes:
       - .:/code
     expose:
       - "8000"
     command: gunicorn --workers=2 infoboard.wsgi:application --bind 0.0.0.0:8000 --timeout 10000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
-    #command: python manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
       - envs/prod/web/front/env.front
     depends_on:
       - db_default
       - db_public
-      #- es
     networks:
       - infoboard_network
 
   infoboard_cms:
-    build: .
+    image: wronamichal/infoboard:latest
     volumes:
       - .:/code
     expose:
       - "8001"
-    command: gunicorn --workers=1 infoboard.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
+    command: gunicorn --workers=2 infoboard.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
     container_name: infoboard_cms
     env_file:
       - envs/prod/web/cms/env.cms
@@ -34,7 +32,6 @@ services:
       - db_default
       - db_public
       - infoboard_front
-      #- es
     networks:
       - infoboard_network
 
@@ -51,7 +48,6 @@ services:
       - infoboard_front
       - db_default
       - db_public
-      #- es
     networks:
       - infoboard_network
 
@@ -68,7 +64,6 @@ services:
       - infoboard_front
       - db_default
       - db_public
-      #- es
     networks:
       - infoboard_network
 
@@ -103,44 +98,16 @@ services:
       - infoboard_network
 
   publisher:
-    build: .
+    image: wronamichal/infoboard:latest
     volumes:
       - .:/code
-    command: python manage.py publisher
+    command: python3 manage.py publisher
     container_name: publisher
     env_file:
       - envs/prod/web/publisher/env.publisher
     depends_on:
       - db_default
       - db_public
-#      - es
-      - redis
-    networks:
-      - infoboard_network
-
-#  es:
-#    container_name: es
-#    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
-#    environment:
-#      - node.name=es
-#      - cluster.name=es-docker
-#      - discovery.type=single-node
-#      - bootstrap.memory_lock=false
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      - es_data:/usr/share/elasticsearch/data
-#    expose:
-#      - "9200"
-#    networks:
-#      - infoboard_network
-
-
-  redis:
-    image: redis:alpine
     networks:
       - infoboard_network
 

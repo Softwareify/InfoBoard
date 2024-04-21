@@ -7,34 +7,32 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
-      - envs/local/web/front/env.front
+      - envs/docker/local/web/front/env.front
     depends_on:
       - db_default
       - db_public
       - es
       - redis
 
-#  cms:
-#    build: .
-#    volumes:
-#      - .:/code
-#    ports:
-#      - "8001:8001"
-#    command: python manage.py runserver 0.0.0.0:8001
-#    container_name: infoboard_cms
-#    env_file:
-#      - envs/local/web/cms/env.cms
-#    depends_on:
-#      - db_default
-#      - db_public
-#      - front
-#      - es
-#      - redis
-#    deploy:
-#      replicas: 0
+  cms:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8001:8001"
+    command: python3 manage.py runserver 0.0.0.0:8001
+    container_name: infoboard_cms
+    env_file:
+      - envs/docker/local/web/cms/env.cms
+    depends_on:
+      - db_default
+      - db_public
+      - front
+      - es
+      - redis
 
 
   db_default:
@@ -80,19 +78,14 @@ services:
     ports:
       - "9200:9200"
 
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-
   publisher:
       build: .
       volumes:
         - .:/code
-      command: python manage.py publisher
+      command: python3 manage.py publisher
       container_name: publisher
       env_file:
-        - envs/local/publisher/env.publisher
+        - envs/docker/local/publisher/env.publisher
       depends_on:
         - db_default
         - db_public
