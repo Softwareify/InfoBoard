@@ -1,3 +1,5 @@
+import os.path
+
 from django.http import Http404, HttpResponse
 from moviepy.editor import *
 
@@ -25,6 +27,8 @@ class VideoPreviewMergeMiddleware:
                     if hasattr(getattr(video_position, "video"), "filepath")
                 ]
                 merged_clips = concatenate_videoclips(clips)
+                if not os.path.exists("./mediafiles/videos_rendered_preview"):
+                    os.makedirs("./mediafiles/videos_rendered_preview")
                 merged_clips.write_videofile(
                     f"./mediafiles/videos_rendered_preview/{video_snippet_pk}.mp4"
                 )
