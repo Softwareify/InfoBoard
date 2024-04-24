@@ -1,6 +1,7 @@
 import os.path
 
 from django.http import Http404, HttpResponse
+from django.shortcuts import redirect
 from moviepy.editor import *
 
 from snippets.video_snippet.models import VideoSnippet
@@ -42,4 +43,14 @@ class VideoPreviewMergeMiddleware:
                 raise Http404(e)
             return HttpResponse(video_response.buffer, content_type="video/mp4")
 
+        return self.get_response(request)
+
+
+class AuthenicateRequiredMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if not request.user.is_authenticated and not request.path == "/auth/login/":
+            return redirect("login")
         return self.get_response(request)

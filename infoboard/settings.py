@@ -57,21 +57,23 @@ REST_FRAMEWORK = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
-# Elasticsearch configuration
-# ELASTICSEARCH_DSL = {
-#     "default": {"hosts": f"{os.getenv('ES_HOST')}:9200"},
-# }
+MIDDLEWARE_CMS = ["infoboard.middlewares.AuthenicateRequiredMiddleware"]
 
-MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "infoboard.middlewares.VideoPreviewMergeMiddleware",
-]
+MIDDLEWARE = (
+    [
+        "django.middleware.security.SecurityMiddleware",
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+        "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        "infoboard.middlewares.VideoPreviewMergeMiddleware",
+    ]
+    + MIDDLEWARE_CMS
+    if IS_CMS
+    else []
+)
 
 ROOT_URLCONF = "infoboard.urls"
 

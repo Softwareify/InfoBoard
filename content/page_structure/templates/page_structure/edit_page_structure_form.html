@@ -6,10 +6,13 @@
           {% endfor %}
       </div>
 {% endif %}
-<div class="container text-center">
+<div class="container text-center container-page-structure">
+{% if page.status != 1 %}
+    <div class="overlay"></div>
+{% endif %}
   <div class="row" style="height: 100%; margin-bottom: 10px; padding: 5px;">
     <div class="col">
-      Komponent nagłówka
+        <b>Komponent nagłówka</b>
             <form action="/snippets/{{ page.page_structure.header_snippet.id }}" method="POST">
             {% csrf_token %}
                 <select class="form-select" id="header_snippet" name="type" style="margin-bottom: 10px;">
@@ -36,7 +39,7 @@
   </div>
     <div class="row" style="height: 100%; margin-bottom: 10px; padding: 5px;">
     <div class="col">
-      Komponent głównej treści
+        <b>Komponent głównej treści</b>
             <form action="/snippets/{{ page.page_structure.content_snippet.id }}" method="POST">
             {% csrf_token %}
                 <select class="form-select" id="content_snippet" name="type" style="margin-bottom: 10px;">
@@ -57,13 +60,13 @@
                  {% if page.page_structure.content_snippet.snippet %}
                      {{ page.page_structure.content_snippet.snippet_form.as_p }}
                  {% endif %}
-                <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin: 5px;">Save</button>
+                <button class="btn btn-primary" type="submit" aria-expanded="false" style="margin: 5px;">Zapisz</button>
             </form>
     </div>
   </div>
     <div class="row" style="height: 100%; margin-bottom: 10px; padding: 5px;">
     <div class="col">
-      Komponent stopki
+        <b>Komponent stopki</b>
             <form action="/snippets/{{ page.page_structure.footer_snippet.id }}" method="POST">
             {% csrf_token %}
                 <select class="form-select" id="footer_snippet" name="type" style="margin-bottom: 10px;">

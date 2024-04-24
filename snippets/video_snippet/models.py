@@ -18,6 +18,8 @@ class VideoSnippet(models.Model):
             for video_position in self.positions.all().order_by("-order")
             if hasattr(getattr(video_position, "video"), "filepath")
         ]
+        if not clips_input:
+            return
         merge_clips_inputs = ffmpeg.concat(*clips_input)
         merge_clips_output = merge_clips_inputs.output(
             f"./mediafiles/videos_rendered/{self.id}.mp4", format="mp4"

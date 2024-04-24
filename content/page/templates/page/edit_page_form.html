@@ -1,3 +1,4 @@
+{% load static %}
 {% if errors %}
       <div class="alert alert-danger" role="alert">
           {% for error_field_name, error_info in errors.items %}
@@ -5,7 +6,10 @@
           {% endfor %}
       </div>
 {% endif %}
-<form action="{{ request.get_full_path }}" method="POST">
+<form action="{{ request.get_full_path }}" method="POST" class="edit-page-form">
+    {% if page.status != 1 %}
+    <div class="overlay"></div>
+{% endif %}
     {% csrf_token %}
     <div class="mb-3">
         <label><b>Nazwa strony</b></label>
