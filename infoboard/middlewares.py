@@ -44,13 +44,3 @@ class VideoPreviewMergeMiddleware:
             return HttpResponse(video_response.buffer, content_type="video/mp4")
 
         return self.get_response(request)
-
-
-class AuthenicateRequiredMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-        if not request.user.is_authenticated and not request.path == "/auth/login/":
-            return redirect("login")
-        return self.get_response(request)

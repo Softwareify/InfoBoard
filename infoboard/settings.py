@@ -57,10 +57,6 @@ REST_FRAMEWORK = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
-MIDDLEWARE_CMS = [
-    "infoboard.middlewares.AuthenicateRequiredMiddleware",
-]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -71,9 +67,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "infoboard.middlewares.VideoPreviewMergeMiddleware",
 ]
-
-if IS_CMS:
-    MIDDLEWARE += MIDDLEWARE_CMS
 
 print(MIDDLEWARE)
 
