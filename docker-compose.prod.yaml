@@ -110,6 +110,8 @@ services:
       - db_public
     networks:
       - infoboard_network
+    deploy:
+      replicas: 0
 
 volumes:
   postgres_data_default:
