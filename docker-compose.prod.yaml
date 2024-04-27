@@ -97,21 +97,21 @@ services:
     networks:
       - infoboard_network
 
-  publisher:
-    image: wronamichal/infoboard:latest
-    volumes:
-      - .:/code
-    command: python3 manage.py publisher
-    container_name: publisher
-    env_file:
-      - envs/prod/web/publisher/env.publisher
-    depends_on:
-      - db_default
-      - db_public
-    networks:
-      - infoboard_network
-    deploy:
-      replicas: 0
+#  publisher:
+#    image: wronamichal/infoboard:latest
+#    volumes:
+#      - .:/code
+#    command: python3 manage.py publisher
+#    container_name: publisher
+#    env_file:
+#      - envs/prod/web/publisher/env.publisher
+#    depends_on:
+#      - db_default
+#      - db_public
+#    networks:
+#      - infoboard_network
+#    deploy:
+#      replicas: 0
 
 volumes:
   postgres_data_default:
