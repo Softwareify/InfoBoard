@@ -8,7 +8,7 @@ services:
       - .:/code
     expose:
       - "8000"
-    command: gunicorn --workers=2 infoboard.wsgi:application --bind 0.0.0.0:8000 --timeout 10000 --log-level=info --log-file=./logs/gunicorn_front.log --access-logfile=./logs/gunicorn-access_front.log
+    command: python3 manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
       - envs/prod/web/front/env.front
@@ -24,7 +24,7 @@ services:
       - .:/code
     expose:
       - "8001"
-    command: gunicorn --workers=2 infoboard.wsgi:application --bind 0.0.0.0:8001 --log-level=info --log-file=./logs/gunicorn_cms.log --access-logfile=./logs/gunicorn-access_cms.log
+    command: python3 manage.py runserver 0.0.0.0:8001
     container_name: infoboard_cms
     env_file:
       - envs/prod/web/cms/env.cms
