@@ -7,15 +7,13 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
-      - envs/local/web/front/env.front
+      - envs/docker/local/web/front/env.front
     depends_on:
       - db_default
       - db_public
-      - es
-      - redis
 
   cms:
     build: .
@@ -23,16 +21,27 @@ services:
       - .:/code
     ports:
       - "8001:8001"
-    command: python manage.py runserver 0.0.0.0:8001
+    command: python3 manage.py runserver 0.0.0.0:8001
     container_name: infoboard_cms
     env_file:
-      - envs/local/web/cms/env.cms
+      - envs/docker/local/web/cms/env.cms
     depends_on:
       - db_default
       - db_public
       - front
-      - es
-      - redis
+
+  publisher:
+      build: .
+      volumes:
+        - .:/code
+      command: python3 manage.py publisher
+      container_name: publisher
+      env_file:
+        - envs/docker/local/publisher/env.publisher
+      depends_on:
+        - db_default
+        - db_public
+
 
   db_default:
     image: postgres:15.1-bullseye
@@ -60,28 +69,6 @@ services:
     env_file:
       - envs/local/db/env.public
 
-  es:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
-    environment:
-      - node.name=es
-      - cluster.name=es-docker
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - es_data:/usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
-
-  redis:
-    image: redis:alpine
-
-
 volumes:
   postgres_data_default:
   postgres_data_public:
-  es_data:

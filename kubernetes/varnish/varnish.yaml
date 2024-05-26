@@ -17,12 +17,12 @@ data:
     }
         
     sub vcl_recv {
-        if (req.http.host == "infoboard-kubernetes.michalwrona.local.pl") {
+        if (req.http.host == "infoboard.michalwrona.pl") {
             set req.backend_hint = front;
-        } else if (req.http.host == "cms.infoboard-kubernetes.michalwrona.local.pl") {
+        } else if (req.http.host == "cms-infoboard.michalwrona.pl") {
             set req.backend_hint = cms;
             return (pass);
-        }  
+        }
     }
 ---
 apiVersion: apps/v1
@@ -45,7 +45,16 @@ spec:
       - name: varnish
         image: varnish:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+        args:
+          - "varnishd"
+          - "-F"
+          - "-a"
+          - ":8080"
+          - "-f"
+          - "/etc/varnish/default.vcl"
+          - "-s"
+          - "malloc,256m"
         volumeMounts:
         - name: varnish-config
           mountPath: /etc/varnish
@@ -61,10 +70,10 @@ metadata:
   labels:
     app: varnish
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: varnish
   ports:
   - name: http
     port: 80
-    targetPort: 80
+    targetPort: 8080
