@@ -10,3 +10,6 @@ class WyswigSnippet(models.Model):
 
     def publish(self):
         self.save(using="public")
+
+    def unpublish(self):
+        self.delete(using="public")

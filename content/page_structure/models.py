@@ -33,3 +33,9 @@ class PageStructure(models.Model):
         self.content_snippet.publish()
         self.footer_snippet.publish()
         self.save(using="public")
+
+    def unpublish(self):
+        self.delete(using="public")
+        self.header_snippet.unpublish()
+        self.content_snippet.unpublish()
+        self.footer_snippet.unpublish()

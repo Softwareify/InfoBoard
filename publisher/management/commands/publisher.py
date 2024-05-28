@@ -3,6 +3,7 @@ from time import sleep
 
 import requests
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 
 from infoboard import settings
 from publisher.models import Task
@@ -18,7 +19,8 @@ class Command(BaseCommand):
             print("Run loop publisher.")
             now = datetime.now()
             tasks = Task.objects.filter(
-                due_date__lte=now, retries__lt=settings.MAX_RETRIES, execution_date=None
+                (Q(due_date__lte=now) | Q(due_date__isnull=True))
+                & Q(retries__lt=settings.MAX_RETRIES, execution_date=None)
             )
             for task in tasks:
                 try:

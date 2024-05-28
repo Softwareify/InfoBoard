@@ -55,3 +55,8 @@ class BaseSnippet(models.Model):
         if self.snippet:
             self.snippet.publish()
         self.save(using="public")
+
+    def unpublish(self):
+        if self.snippet:
+            self.snippet.unpublish()
+        self.delete(using="public")

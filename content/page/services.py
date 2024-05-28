@@ -55,3 +55,14 @@ class PageService:
         page.refresh_from_db()
         page.publish()
         return True
+
+    @classmethod
+    @transaction.atomic
+    def unpublish(cls, page_id: int) -> bool:
+        page = Page.objects.get(id=page_id)
+        PageCMSStatusService.changes_status_page(
+            page=page, new_status=Page.StatusChoices.ARCHIVE.value
+        )
+        page.refresh_from_db()
+        page.unpublish()
+        return True

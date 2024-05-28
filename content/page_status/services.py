@@ -17,6 +17,9 @@ class PageCMSStatusService:
                 Page.StatusChoices.NEW_DRAFT,
                 Page.StatusChoices.TO_ARCHIVE,
             ],
+            Page.StatusChoices.TO_ARCHIVE.value: [
+                Page.StatusChoices.ARCHIVE,
+            ],
             Page.StatusChoices.ARCHIVE.value: [
                 Page.StatusChoices.NEW_DRAFT,
             ],
@@ -33,6 +36,12 @@ class PageCMSStatusService:
                     type_publication="page_publish",
                     object_id=page.id,
                     due_date=page.publish_from,
+                )
+            elif new_status is Page.StatusChoices.TO_ARCHIVE.value:
+                PublicationService.add_task(
+                    type_publication="page_archive",
+                    object_id=page.id,
+                    due_date=page.publish_to,
                 )
             page.status = new_status
             page.save()

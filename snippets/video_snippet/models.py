@@ -1,3 +1,5 @@
+import os.path
+
 import ffmpeg
 from django.db import models
 
@@ -25,6 +27,11 @@ class VideoSnippet(models.Model):
             f"./mediafiles/videos_rendered/{self.id}.mp4", format="mp4"
         )
         merge_clips_output.run(overwrite_output=True)
+
+    def unpublish(self):
+        if os.path.exists(f"./mediafiles/videos_rendered/{self.id}.mp4"):
+            os.remove(f"./mediafiles/videos_rendered/{self.id}.mp4")
+        self.delete(using="public")
 
 
 class VideoPositionSnippet(models.Model):

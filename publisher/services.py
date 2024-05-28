@@ -22,3 +22,7 @@ class PublicationService:
     @staticmethod
     def page_publish(page_id: int):
         return PageService.publish(page_id=page_id)
+
+    @staticmethod
+    def page_archive(page_id: int):
+        return PageService.unpublish(page_id=page_id)

@@ -49,3 +49,7 @@ class Page(models.Model):
     def publish(self):
         self.page_structure.publish()
         self.save(using="public")
+
+    def unpublish(self):
+        self.page_structure.unpublish()
+        self.delete(using="public")
