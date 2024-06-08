@@ -49,18 +49,30 @@ class VarnishService:
         for varnish_ip in self.varnish_ip_list:
             try:
                 request = requests.request(
-                    http_method, f"{self.VARNISH_PROTO}://{varnish_ip}:{self.VARNISH_PORT}", headers=headers, timeout=5
+                    http_method,
+                    f"{self.VARNISH_PROTO}://{varnish_ip}:{self.VARNISH_PORT}",
+                    headers=headers,
+                    timeout=5,
                 )
                 if request.status_code == 200:
                     print("Varnish %s cache cleared - %s.", varnish_ip, headers)
                 elif request.status_code == 403:
                     print(
-                        "Could not clear cache for %s. Check acl purge varnish configuration.", varnish_ip
+                        "Could not clear cache for %s. Check acl purge varnish configuration.",
+                        varnish_ip,
                     )
                 else:
-                    print("Could not clear cache for %s. Status code: %s.", varnish_ip, request.status_code)
+                    print(
+                        "Could not clear cache for %s. Status code: %s.",
+                        varnish_ip,
+                        request.status_code,
+                    )
             except Exception as exception:  # noqa
-                print("Could not clear cache for %s. Exception: %s.", varnish_ip, exception)
+                print(
+                    "Could not clear cache for %s. Exception: %s.",
+                    varnish_ip,
+                    exception,
+                )
 
     def purge_both(self, *, domain: str, path: str) -> None:
         """
