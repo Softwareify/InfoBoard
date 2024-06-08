@@ -4,6 +4,7 @@ import ffmpeg
 from django.db import models
 
 from modules.video.models import Video
+from varnish.services import VarnishService
 
 
 class VideoSnippet(models.Model):
@@ -27,6 +28,7 @@ class VideoSnippet(models.Model):
             f"./mediafiles/videos_rendered/{self.id}.mp4", format="mp4"
         )
         merge_clips_output.run(overwrite_output=True)
+        VarnishService().purge_path(path=f"/mediafiles/videos_rendered/{self.id}")
 
     def unpublish(self):
         if os.path.exists(f"./mediafiles/videos_rendered/{self.id}.mp4"):

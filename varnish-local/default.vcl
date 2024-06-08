@@ -11,10 +11,34 @@ backend nginx_infoboard_front {
 }
 
 sub vcl_recv {
-        if (req.method == "FULLBAN") {
-            ban("req.http.host ~ .*");
-            return (synth(200, "Full cache cleared"));
+        # BAN SECTION
+        if (req.http.X-Forwarded-For && req.method == "FULLBAN" || req.method == "PURGEBOTH" || req.method == "PURGEPATH" || req.method == "PURGEHOST") {
+
+            # Ban everything
+            if (req.method == "FULLBAN") {
+                ban("obj.status != 0");
+                return (synth(200, "Full cache cleared"));
+            }
+
+            # Ban based on domain (X-Purge-Domain) and path (X-Purge-Path)
+            if (req.method == "PURGEBOTH") {
+                ban("req.http.host ~ ^" + req.http.X-Purge-Domain + " && req.url ~ " + req.http.X-Purge-Path);
+                return(synth(200, "Purged"));
+            }
+
+            # Ban based on domain (X-Purge-Domain)
+            if (req.method == "PURGEHOST") {
+                ban("req.http.host ~ ^" + req.http.X-Purge-Domain);
+                return(synth(200, "Purged"));
+            }
+
+            # Ban based on path (X-Purge-Path)
+            if (req.method == "PURGEPATH") {
+                ban("req.url ~ " + req.http.X-Purge-Path);
+                return(synth(200, "Purged"));
+            }
         }
+
         if (req.http.host == "cms.infoboard-local.wronamichal.pl") {
             set req.http.host = "cms.infoboard-local.wronamichal.pl";
             set req.backend_hint = nginx_infoboard_cms;
@@ -34,7 +58,6 @@ sub vcl_recv {
         if (req.method != "POST") {
             return (pass);
         }
-        return(hash);
     }
 
 
@@ -43,15 +66,4 @@ sub vcl_backend_response {
         unset beresp.http.Set-Cookie;
         set beresp.ttl = 1d;
     }
-}
-
-sub vcl_deliver {
-    unset resp.http.Via;
-    unset resp.http.X-Varnish;
-    unset resp.http.Server;
-    unset resp.http.x-content-type-options;
-    unset resp.http.x-frame-options;
-    unset resp.http.vary;
-    unset resp.http.CF-Cache-Status;
-    unset resp.http.CF-RAY;
 }

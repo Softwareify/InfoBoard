@@ -3,6 +3,7 @@ from django.db import transaction
 
 from content.page_status.services import PageCMSStatusService
 from snippets.models import BaseSnippet
+from varnish.services import VarnishService
 
 from ..page_structure.models import PageStructure
 from .models import Page
@@ -54,6 +55,7 @@ class PageService:
         )
         page.refresh_from_db()
         page.publish()
+        VarnishService().purge_path(path=str(page.slug) if page.slug else "/")
         return True
 
     @classmethod
@@ -65,4 +67,5 @@ class PageService:
         )
         page.refresh_from_db()
         page.unpublish()
+        VarnishService().purge_path(path=str(page.slug) if page.slug else "/")
         return True
