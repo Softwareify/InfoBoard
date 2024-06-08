@@ -7,4 +7,4 @@ resources:
   - db/default/db_default.yaml
   - db/public/db_public.yaml
   - varnish/varnish.yaml
-  #- publisher/publisher.yaml
+  - publisher/publisher.yaml

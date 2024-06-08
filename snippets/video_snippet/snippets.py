@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from snippets.snippets import BaseSnippet
 
 
@@ -6,4 +8,5 @@ class VideoSnippetView(BaseSnippet):
 
     def get_context(self):
         self.context["snippet"] = self.snippet_obj
+        self.context["IS_CMS"] = settings.IS_CMS
         return self.context

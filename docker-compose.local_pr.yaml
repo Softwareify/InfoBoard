@@ -7,16 +7,16 @@ services:
       - .:/code
     expose:
       - "8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
     container_name: infoboard_front
     env_file:
       - envs/local_pr/web/front/env.front
     depends_on:
       - db_default
       - db_public
-      #- es
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.2
 
   infoboard_cms:
     build: .
@@ -24,7 +24,7 @@ services:
       - .:/code
     expose:
       - "8001"
-    command: python manage.py runserver 0.0.0.0:8001
+    command: python3 manage.py runserver 0.0.0.0:8001
     container_name: infoboard_cms
     env_file:
       - envs/local_pr/web/cms/env.cms
@@ -32,16 +32,33 @@ services:
       - db_default
       - db_public
       - infoboard_front
-      #- es
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.3
+
+  infoboard_publisher:
+    build: .
+    volumes:
+      - .:/code
+    command: python3 manage.py publisher
+    env_file:
+      - envs/local_pr/web/publisher/env.publisher
+    depends_on:
+      - db_default
+      - db_public
+      - infoboard_cms
+      - infoboard_front
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.4
 
   nginx_infoboard_front:
     container_name: nginx_infoboard_front
     restart: always
     build: ./nginx-local_front
     volumes:
-      - /home/michal/workspaces/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles/
+      - /home/michal/workspaces/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles
+      - /home/michal/workspaces/InfoBoard/static:/var/www/InfoBoard/static
     expose:
       - "8081"
     depends_on:
@@ -49,16 +66,18 @@ services:
       - infoboard_front
       - db_default
       - db_public
-      #- es
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.5
+
 
   nginx_infoboard_cms:
     container_name: nginx_infoboard_cms
     restart: always
     build: ./nginx-local_cms
     volumes:
-      - /home/michal/workspaces/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles/
+      - /home/michal/workspaces/InfoBoard/staticfiles:/var/www/InfoBoard/staticfiles
+      - /home/michal/workspaces/InfoBoard/static:/var/www/InfoBoard/static
     expose:
       - "8082"
     depends_on:
@@ -66,9 +85,9 @@ services:
       - infoboard_front
       - db_default
       - db_public
-      #- es
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.6
 
   db_default:
     image: postgres:15.1-bullseye
@@ -82,8 +101,9 @@ services:
     environment:
       PGTZ: 'Europe/Warsaw'
       TZ: 'Europe/Warsaw'
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.7
 
   db_public:
     image: postgres:15.1-bullseye
@@ -97,28 +117,10 @@ services:
     environment:
       PGTZ: 'Europe/Warsaw'
       TZ: 'Europe/Warsaw'
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.8
 
-#  es:
-#    container_name: es
-#    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
-#    environment:
-#      - node.name=es
-#      - cluster.name=es-docker
-#      - discovery.type=single-node
-#      - bootstrap.memory_lock=false
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      - es_data:/usr/share/elasticsearch/data
-#    expose:
-#      - "9200"
-#    networks:
-#      - infoboard_network
 
   varnish:
     restart: always
@@ -136,19 +138,18 @@ services:
       - nginx_infoboard_cms
     environment:
       - VARNISH_SIZE=2G
-#    networks:
-#      - infoboard_network
-
-  redis:
-    image: redis:alpine
-#    networks:
-#      - infoboard_network
+    networks:
+      infoboard_network:
+        ipv4_address: 172.21.0.9
 
 volumes:
   postgres_data_default:
   postgres_data_public:
-  es_data:
 
-#networks:
-#  infoboard_network:
-#    external: true
+networks:
+  infoboard_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1
