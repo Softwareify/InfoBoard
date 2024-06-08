@@ -1,8 +1,7 @@
-from django.urls import include, path
+from django.urls import re_path
 
-from .views import preview, public
+from .views import public
 
 urlpatterns = [
-    path("", public),
-    path("<slug:slug>", public),
+    re_path(r"^(?P<slug>[a-zA-Z0-9-]*)$", public),
 ]
