@@ -3,6 +3,8 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
+from healthcheck.views import HealthCheckView
+
 # from elastic_search.page.views import PageDocumentView
 
 urlpatterns = []
@@ -25,3 +27,5 @@ if settings.IS_FRONT:
         + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
         + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     )
+
+urlpatterns += [path("health/health-check", HealthCheckView.as_view(), name="health-check"),]

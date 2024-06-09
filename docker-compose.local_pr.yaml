@@ -52,8 +52,8 @@ services:
       infoboard_network:
         ipv4_address: 172.21.0.4
 
-  nginx_infoboard_front:
-    container_name: nginx_infoboard_front
+  nginx-infoboard-front:
+    container_name: nginx-infoboard-front
     restart: always
     build: ./nginx-local_front
     volumes:
@@ -71,8 +71,8 @@ services:
         ipv4_address: 172.21.0.5
 
 
-  nginx_infoboard_cms:
-    container_name: nginx_infoboard_cms
+  nginx-infoboard-cms:
+    container_name: nginx-infoboard-cms
     restart: always
     build: ./nginx-local_cms
     volumes:
@@ -93,8 +93,8 @@ services:
     image: postgres:15.1-bullseye
     volumes:
       - postgres_data_default:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     container_name: infoboard_db_default
     env_file:
       - envs/local_pr/db/env.default
@@ -109,8 +109,8 @@ services:
     image: postgres:15.1-bullseye
     volumes:
       - postgres_data_public:/var/lib/postgresql/data/
-    ports:
-      - "5433:5432"
+    expose:
+      - "5432"
     container_name: infoboard_db_public
     env_file:
       - envs/local_pr/db/env.public
@@ -134,8 +134,8 @@ services:
       - /var/lib/varnish:exec
     command: "-p default_keep=300"
     depends_on:
-      - nginx_infoboard_front
-      - nginx_infoboard_cms
+      - nginx-infoboard-front
+      - nginx-infoboard-cms
     environment:
       - VARNISH_SIZE=2G
     networks:
