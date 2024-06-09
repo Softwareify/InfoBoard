@@ -1,4 +1,4 @@
-from django.db import connections, OperationalError
+from django.db import OperationalError, connections
 
 
 class HealthCheckService:

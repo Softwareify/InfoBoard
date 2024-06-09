@@ -68,8 +68,6 @@ MIDDLEWARE = [
     "infoboard.middlewares.VideoPreviewMergeMiddleware",
 ]
 
-print(MIDDLEWARE)
-
 ROOT_URLCONF = "infoboard.urls"
 
 TEMPLATES = [

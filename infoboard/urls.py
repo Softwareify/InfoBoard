@@ -28,4 +28,6 @@ if settings.IS_FRONT:
         + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     )
 
-urlpatterns += [path("health/health-check", HealthCheckView.as_view(), name="health-check"),]
+urlpatterns += [
+    path("health/health-check", HealthCheckView.as_view(), name="health-check"),
+]

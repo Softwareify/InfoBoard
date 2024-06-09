@@ -14,20 +14,6 @@ class VarnishService:
     def __init__(self):
         self.varnish_ip_list = self._get_varnish_ip_list()
 
-    def slice_domain_suffix(self, *, domain: str) -> str:
-        """
-        Get domain without suffix.
-
-        :param domain: domain address
-
-        :return: clear domain
-        """
-        split_string = ".infosite-redesign."
-        if split_string in domain:
-            return domain.split(split_string)[0]
-
-        return domain
-
     def _get_varnish_ip_list(self):
         """Get all varnishes ips."""
         try:
@@ -67,24 +53,12 @@ class VarnishService:
                         varnish_ip,
                         request.status_code,
                     )
-            except Exception as exception:  # noqa
+            except Exception as exception:
                 print(
                     "Could not clear cache for %s. Exception: %s.",
                     varnish_ip,
                     exception,
                 )
-
-    def purge_both(self, *, domain: str, path: str) -> None:
-        """
-        Clear cache for domain and slug.
-
-        :param domain: domain address
-        :param path: slug
-
-        """
-        domain = self.slice_domain_suffix(domain=domain)
-        headers = {"X-Purge-Domain": domain, "X-Purge-Path": path}
-        self.send_request(http_method="PURGEBOTH", headers=headers)
 
     def purge_path(self, *, path: str) -> None:
         """

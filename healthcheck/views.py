@@ -10,5 +10,7 @@ class HealthCheckView(APIView):
 
     def get(self, _request):
         if not HealthCheckService.health_check():
-            return Response({'healthy': False}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
-        return Response({'healthy': True}, status=status.HTTP_200_OK)
+            return Response(
+                {"healthy": False}, status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        return Response({"healthy": True}, status=status.HTTP_200_OK)
