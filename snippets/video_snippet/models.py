@@ -28,7 +28,7 @@ class VideoSnippet(models.Model):
             f"./mediafiles/videos_rendered/{self.id}.mp4", format="mp4"
         )
         merge_clips_output.run(overwrite_output=True)
-        VarnishService().purge_path(path=f"/mediafiles/videos_rendered/{self.id}")
+        VarnishService().purge_path(path=f"/mediafiles/videos_rendered/{self.id}.mp4")
 
     def unpublish(self):
         if os.path.exists(f"./mediafiles/videos_rendered/{self.id}.mp4"):
