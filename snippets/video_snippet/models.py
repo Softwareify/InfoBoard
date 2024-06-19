@@ -24,6 +24,8 @@ class VideoSnippet(models.Model):
         if not clips_input:
             return
         merge_clips_inputs = ffmpeg.concat(*clips_input)
+        if not os.path.exists("./mediafiles/videos_rendered"):
+            os.makedirs("./mediafiles/videos_rendered")
         merge_clips_output = merge_clips_inputs.output(
             f"./mediafiles/videos_rendered/{self.id}.mp4", format="mp4"
         )
